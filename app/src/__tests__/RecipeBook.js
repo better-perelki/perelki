@@ -1,5 +1,5 @@
-const Drink = require('./Drink');
-const RecipeBook = require('./RecipeBook');
+const Drink = require('../Drink');
+const RecipeBook = require('../RecipeBook');
 
 //DLA KLASY RECIPEBOOK
 
