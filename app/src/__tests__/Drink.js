@@ -1,5 +1,5 @@
-const DrinkBuilder = require('../src/DrinkBuilder.js');
-const Drink = require('../src/Drink.js');
+const DrinkBuilder = require('../DrinkBuilder.js');
+const Drink = require('../Drink.js');
 
 beforeEach(() => {
   drinkBuilder = new DrinkBuilder();

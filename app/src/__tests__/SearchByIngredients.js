@@ -1,7 +1,7 @@
-const DrinkBuilder = require('../src/DrinkBuilder.js');
-const Drink = require('../src/Drink.js');
+const DrinkBuilder = require('../DrinkBuilder.js');
+const Drink = require('../Drink.js');
 
-const Builder = new DrinkBuilder(); 
+const Builder = new DrinkBuilder();
 const mockDrinks = [
   Builder.setName('Brainteaster').setIngredients(['Sambuca', 'Advocaat', 'Erin Cream']).build(),
   Builder.setName('Snowball').setIngredients(['Lemonade', 'Advocaat', 'Lemon']).build(),
