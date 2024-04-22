@@ -11,9 +11,9 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path='/' exact component={Home} />
-          <Route path='/search-by-name' exact component={SearchByName} />
-          <Route path='/search-by-ingredients' exact component={SearchByIngredients} />
+          <Route path='/' exact element={<Home />} />
+          <Route path='/search-by-name' exact element={<SearchByName />} />
+          <Route path='/search-by-ingredients' exact element={<SearchByIngredients />} />
         </Routes>
       </Router>
     </div>
