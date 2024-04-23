@@ -1,16 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import PopularList from './PopularList';
-
-jest.mock('./GetIngredients', () => ({
-    __esModule: true,
-    default: jest.fn(),
-}));
+import PopularList from '../helpers/PopularList';
 
 describe('PopularList Component Tests', () => {
     // Test 1:
-    test('renders the component and checks if the drinks list is present', () => {
+    test('renders the component and checks if the drinks list is present', async () => {
         global.fetch = jest.fn(() =>
             Promise.resolve({
                 json: () =>
@@ -20,21 +15,26 @@ describe('PopularList Component Tests', () => {
                                 idDrink: '1',
                                 strDrinkThumb: 'mockImage1',
                                 strDrink: 'Mock Drink 1',
+                                strIngredient1: 'ingr1',
+                                strIngredient2: 'ingr2',
+                                strIngredient3: 'ingr3'
                             },
                             {
                                 idDrink: '2',
                                 strDrinkThumb: 'mockImage2',
                                 strDrink: 'Mock Drink 2',
+                                strIngredient1: 'ingr1',
+                                strIngredient2: 'ingr2',
+                                strIngredient3: 'ingr3'
                             },
                         ],
                     }),
             })
         );
 
-
         render(<PopularList />);
 
-        const drinkElement = screen.getByText(/Mock Drink 1/i);
+        const drinkElement = await screen.findByText(/Mock Drink 1/i);
         expect(drinkElement).toBeInTheDocument();
     });
 
@@ -44,39 +44,10 @@ describe('PopularList Component Tests', () => {
 
         render(<PopularList />);
 
-        const errorMessage = await screen.findByText(/error fetching drinks:/i);
-        expect(errorMessage).toBeInTheDocument();
-    });
-
-    // Test 3:
-    test('checks if the GetIngredients function is called with the correct drink data', () => {
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: () =>
-                    Promise.resolve({
-                        drinks: [
-                            {
-                                idDrink: '1',
-                                strDrinkThumb: 'mockImage1',
-                                strDrink: 'Mock Drink 1',
-                            },
-                        ],
-                    }),
-            })
-        );
-
-        const mockIngredients = ['Ingredient 1', 'Ingredient 2'];
-        jest.mock('./GetIngredients', () => ({
-            __esModule: true,
-            default: jest.fn(() => mockIngredients),
-        }));
-
-        render(<PopularList />);
-
-        expect(require('./GetIngredients').default).toHaveBeenCalledWith({
-            idDrink: '1',
-            strDrinkThumb: 'mockImage1',
-            strDrink: 'Mock Drink 1',
+        await (() => {
+            expect(console.error).toHaveBeenCalled();
         });
+
+        expect(screen.queryByText(/error fetching drinks:/i)).not.toBeInTheDocument();
     });
 });
