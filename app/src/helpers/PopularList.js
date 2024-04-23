@@ -6,7 +6,7 @@ function PopularList() {
     const [popular, setPopular] = useState([]);
 
     useEffect(() => {
-        fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita')
+        fetch('https://www.thecocktaildb.com/api/json/v2/9973533/popular.php')
             .then(response => response.json())
             .then(data => setPopular(data.drinks))
             .catch(error => console.error('error fetching drinks:', error));
