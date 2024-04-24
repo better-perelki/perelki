@@ -1,9 +1,7 @@
 import React from 'react'
 
 function PrintDrink() {
-    return (
-        <div>PrintDrink</div>
-    )
+    <div>PrintDrink</div>
 }
 
 export default PrintDrink

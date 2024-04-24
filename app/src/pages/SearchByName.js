@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import '../styles/SearchByName.css'
+import React, { useState } from 'react';
+import '../styles/SearchByName.css';
 import Drink from '../components/Drink';
 import GetIngredients from '../helpers/GetIngredients';
-import searchIcon from '../assets/search.png'
+import searchIcon from '../assets/search.png';
 import NameSearcher from '../helpers/NameSearcher';
 
 function SearchByName() {
@@ -14,12 +14,13 @@ function SearchByName() {
                 <div className='content'>
                     <h2>What are you looking for?</h2>
                     <div className='searchInput'>
-                        <img src={searchIcon} />
-                        <input placeholder='Enter the name of the drink'
+                        <img src={searchIcon} alt='Search Icon' />
+                        <input
+                            placeholder='Enter the name of the drink'
                             value={searchTerm}
-                            onChange={handleInputChange} />
+                            onChange={handleInputChange}
+                        />
                     </div>
-
                     <div className='drinksList'>
                         {searchResults.map(drink => (
                             <Drink
@@ -32,10 +33,8 @@ function SearchByName() {
                     </div>
                 </div>
             </div>
-
-
         </div>
-    )
+    );
 }
 
-export default SearchByName
+export default SearchByName;
