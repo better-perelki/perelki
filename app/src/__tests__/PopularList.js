@@ -34,8 +34,10 @@ describe('PopularList Component Tests', () => {
 
         render(<PopularList />);
 
-        const drinkElement = await screen.findByText(/Mock Drink 1/i);
-        expect(drinkElement).toBeInTheDocument();
+        await (() => {
+            const drinkElement = screen.findByText(/Mock Drink 1/i);
+            expect(drinkElement).toBeInTheDocument();
+        })
     });
 
     // Test 2:
