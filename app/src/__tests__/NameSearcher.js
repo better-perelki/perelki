@@ -1,94 +1,80 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { renderHook, act } from '@testing-library/react-hooks';
 import NameSearcher from '../helpers/NameSearcher';
 
-// Mocking the fetch function
-global.fetch = jest.fn();
-
-describe('NameSearcher Component Tests', () => {
-    // Test 1: Renders the component and checks if the input is present.
-    test('renders input element', () => {
-        render(<NameSearcher />);
-        const inputElement = screen.getByRole('textbox');
-        expect(inputElement).toBeInTheDocument();
+describe('NameSearcher function', () => {
+    test('checks if initial state is returned', () => {
+        const { result } = renderHook(() => NameSearcher());
+        expect(result.current.searchTerm).toEqual('');
+        expect(result.current.searchResults).toEqual([]);
     });
 
-    // Test 2: Checks if the search results are displayed when there are drinks.
-    test('displays search results when drinks are found', async () => {
+    test('checks if searchTerm is updated when handleInputChange is called', () => {
+        const { result } = renderHook(() => NameSearcher());
+        const event = { target: { value: 'Cocktail' } };
+        act(() => {
+            result.current.handleInputChange(event);
+        });
+        expect(result.current.searchTerm).toEqual('Cocktail');
+    });
+
+    test('checks if searchResults are updated based on searchTerm', async () => {
+        const { result, waitForNextUpdate } = renderHook(() => NameSearcher());
+
         const mockData = {
             drinks: [
-                { idDrink: '1', strDrink: 'Mojito' },
-                { idDrink: '2', strDrink: 'Cosmopolitan' },
-            ],
+                { strDrink: 'Mocktail 1' },
+                { strDrink: 'Mocktail 2' },
+                { strDrink: 'Cocktail 1' },
+                { strDrink: 'Cocktail 2' }
+            ]
         };
-        global.fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockData),
+
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve(mockData),
         });
 
-        render(<NameSearcher />);
-        const inputElement = screen.getByRole('textbox');
-        fireEvent.change(inputElement, { target: { value: 'mojito' } });
-
-        await waitFor(() => {
-            const resultElement = screen.getByText(/Mojito/i);
-            expect(resultElement).toBeInTheDocument();
+        act(() => {
+            result.current.handleInputChange({ target: { value: 'Cocktail' } });
         });
+
+        await waitForNextUpdate();
+
+        expect(result.current.searchResults).toEqual([
+            { strDrink: 'Cocktail 1' },
+            { strDrink: 'Cocktail 2' }
+        ]);
     });
 
-    // Test 3: Checks if the search results are empty when no drinks are found.
-    test('displays empty search results when no drinks are found', async () => {
-        const mockData = {
-            drinks: [],
-        };
-        global.fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockData),
-        });
+    test('checks if searchResults are cleared when searchTerm is empty', async () => {
+        const { result } = renderHook(() => NameSearcher());
 
-        render(<NameSearcher />);
-        const inputElement = screen.getByRole('textbox');
-        fireEvent.change(inputElement, { target: { value: 'mojito' } });
-
-        await waitFor(() => {
-            const resultElement = screen.getByText(/No drinks found/i);
-            expect(resultElement).toBeInTheDocument();
-        });
-    });
-
-    // Test 4: Checks if the search results are cleared when the input is empty.
-    test('clears search results when input is empty', async () => {
         const mockData = {
             drinks: [
-                { idDrink: '1', strDrink: 'Mojito' },
-                { idDrink: '2', strDrink: 'Cosmopolitan' },
-            ],
+                { strDrink: 'Mocktail 1' },
+                { strDrink: 'Mocktail 2' },
+                { strDrink: 'Cocktail 1' },
+                { strDrink: 'Cocktail 2' }
+            ]
         };
-        global.fetch.mockResolvedValueOnce({
-            json: jest.fn().mockResolvedValueOnce(mockData),
+
+        global.fetch = jest.fn().mockResolvedValue({
+            json: () => Promise.resolve(mockData),
         });
 
-        render(<NameSearcher />);
-        const inputElement = screen.getByRole('textbox');
-        fireEvent.change(inputElement, { target: { value: 'mojito' } });
-
-        await waitFor(() => {
-            const resultElement = screen.getByText(/Mojito/i);
-            expect(resultElement).toBeInTheDocument();
+        act(() => {
+            result.current.handleInputChange({ target: { value: 'Cocktail' } });
         });
 
-        fireEvent.change(inputElement, { target: { value: '' } });
+        await new Promise(resolve => setTimeout(resolve, 100));
 
-        await waitFor(() => {
-            const resultElement = screen.queryByText(/Mojito/i);
-            expect(resultElement).not.toBeInTheDocument();
+        expect(result.current.searchResults.length).toEqual(2);
+
+        act(() => {
+            result.current.handleInputChange({ target: { value: '' } });
         });
-    });
 
-    // Test 5: Checks if the search term is updated when the input value changes.
-    test('updates search term when input value changes', () => {
-        render(<NameSearcher />);
-        const inputElement = screen.getByRole('textbox');
-        fireEvent.change(inputElement, { target: { value: 'mojito' } });
-        expect(inputElement.value).toBe('mojito');
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        expect(result.current.searchResults.length).toEqual(0);
     });
 });
