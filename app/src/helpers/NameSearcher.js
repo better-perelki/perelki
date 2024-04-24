@@ -1,26 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-function NameSearcher() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+const useNameSearcher = () => {
+    const [searchTerm, setSearchTerm] = useState(''); //store search term
+    const [searchResults, setSearchResults] = useState([]); //store search results
 
+    //fetch results from api and update them based on the fetched data 
     useEffect(() => {
-        if (searchTerm.trim() === '') {
-            setSearchResults([]);
-            return;
-        }
+        const fetchSearchResults = async () => {
+            //if the term is empty, clear the results
+            if (searchTerm.trim() === '') {
+                setSearchResults([]);
+                return;
+            }
 
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`)
-            .then(response => response.json())
-            .then(data => setSearchResults(data.drinks || []))
-            .catch(error => console.error('Error fetching drinks:', error));
+            try {
+                //fetiching results from the api
+                const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTerm}`);
+                const data = await response.json();
+                setSearchResults(data.drinks || []);
+            } catch (error) {
+                console.error('Error fetching drinks:', error);
+            }
+        };
+
+        //call the function when the search term changes
+        fetchSearchResults();
     }, [searchTerm]);
 
+    //update the search term when the input changes
     const handleInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
-    return { searchTerm, searchResults, handleInputChange }
-}
+    return { searchTerm, searchResults, handleInputChange };
+};
 
-export default NameSearcher;
+export default useNameSearcher;
