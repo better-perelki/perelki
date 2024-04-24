@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useNameSearcher = () => {
+const NameSearcher = () => {
     const [searchTerm, setSearchTerm] = useState(''); //store search term
     const [searchResults, setSearchResults] = useState([]); //store search results
 
@@ -43,4 +43,4 @@ const useNameSearcher = () => {
     return { searchTerm, searchResults, handleInputChange };
 };
 
-export default useNameSearcher;
+export default NameSearcher;
