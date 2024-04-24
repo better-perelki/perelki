@@ -2,11 +2,10 @@
     width: 100%;
     height: 100px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    border-bottom: 1px solid #F2E41D;
+    border-bottom: 1px solid var(--main-color);
     position: fixed;
-    background-color: #262624;
+    background-color: var(--background-color);
     z-index: 100;
 }
 
@@ -14,7 +13,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center
+    text-align: center;
 }
 
 .navbar .left {
@@ -33,8 +32,8 @@
 }
 
 .navbar a {
-    color: #F2E41D;
-    font-size: 48;
+    color: var(--main-color);
+    font-size: 24px;
     font-weight: 400;
     text-decoration: none;
     text-transform: uppercase;
@@ -42,10 +41,10 @@
 }
 
 .navbar a:hover {
-    color: #F25244;
+    color: var(--accent-color);
 }
 
 .navbar a.active {
-    color: #F25244;
+    color: var(--accent-color);
     font-weight: 600;
 }
