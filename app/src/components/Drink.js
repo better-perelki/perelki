@@ -1,5 +1,4 @@
 import React from 'react'
-import '../styles/Drink.css'
 
 function Drink({ image, name, ingredients }) {
     return (
