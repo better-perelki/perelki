@@ -12,8 +12,9 @@ function Navbar() {
                 </Link>
             </div>
             <div className='center'>
+                <Link to='/all-recipes' className={useLocation().pathname === '/all-recipes' ? 'active' : ''}>All Recipes</Link>
                 <Link to='/search-by-name' className={useLocation().pathname === '/search-by-name' ? 'active' : ''}>Search by name</Link>
-                <Link to='/search-by-ingredients' className={useLocation().pathname === '/search-by-ingredients' ? 'active' : ''}>Search by ingredients</Link>
+                <Link to='/search-by-ingredients' className={useLocation().pathname === '/search-by-ingredients' ? 'active' : ''}>Search by Ingredients</Link>
             </div>
         </div>
     )
