@@ -54,7 +54,6 @@ const AllRecipes = () => {
                 ))}
             </div>
 
-            {/* Lista napojów grupowana według liter */}
             {alphabet.letters.map((letterObject) => {
                 const letter = letterObject.letter;
                 const drinks = drinksByLetter[letter] || [];
