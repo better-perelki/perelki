@@ -1,0 +1,57 @@
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.popular {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin: auto; */
+}
+
+.popular .content {
+    margin: 50px auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: auto; */
+}
+
+
+.logo {
+    max-width: 75%;
+}
+
+
+.arrow {
+    position: absolute;
+    bottom: 20px;
+    width: 30px;
+    z-index: 50;
+    transform: rotate(180deg);
+}
+
+img {
+    display: block;
+}
+
+/* @media only screen and (max-width: 600px) {
+    .arrow {
+        width: 5%;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .arrow {
+        width: 30px;
+    }
+} */
