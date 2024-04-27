@@ -14,7 +14,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* margin: auto; */
+    margin: 25px 0;
 }
 
 .popular .content {
@@ -23,7 +23,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin: auto; */
+    margin: auto;
 }
 
 
@@ -43,15 +43,3 @@
 img {
     display: block;
 }
-
-/* @media only screen and (max-width: 600px) {
-    .arrow {
-        width: 5%;
-    }
-}
-
-@media only screen and (min-width: 600px) {
-    .arrow {
-        width: 30px;
-    }
-} */
