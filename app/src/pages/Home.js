@@ -25,8 +25,8 @@ function Header() {
 function PopularSection() {
     return (
         <div className='popular'>
+            <h2>You must try these!</h2>
             <div className='content'>
-                <h2>You must try these!</h2>
                 <PopularList />
             </div>
         </div>
