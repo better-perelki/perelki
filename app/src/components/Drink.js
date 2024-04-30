@@ -1,15 +1,16 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Drink({ image, name, ingredients }) {
+const Drink = ({ id, image, name }) => {
+
     return (
-        <div className='drink'>
-            <img src={image} alt={name} />
-            <div className='info'>
-                <h3>{name}</h3>
-                <p>{ingredients}</p>
-            </div>
+        <div className="drink">
+            <Link to={`/recipe/${id}`}>
+                <img src={image} alt={name} />
+                <p>{name}</p>
+            </Link>
         </div>
-    )
-}
+    );
+};
 
-export default Drink
+export default Drink;
