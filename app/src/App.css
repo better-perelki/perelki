@@ -10,6 +10,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -53,8 +54,8 @@ h2 {
     min-width: 200px;
     max-width: 400px;
     height: auto;
-    /*might need fixing after removing ingrediennts*/
     padding: 20px;
+    /* might need fixing after removing ingredients */
     text-align: center;
     margin: 25px;
 }
