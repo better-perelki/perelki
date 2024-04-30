@@ -6,6 +6,7 @@ import SearchByIngredients from './pages/SearchByIngredients';
 import SearchByName from './pages/SearchByName';
 import AllRecipes from './pages/AllRecipes';
 import ScrollToTop from './components/ScrollUp';
+import RecipeDetails from './pages/RecipeDetails'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/all-recipes' exact element={<AllRecipes />} />
           <Route path='/search-by-name' exact element={<SearchByName />} />
           <Route path='/search-by-ingredients' exact element={<SearchByIngredients />} />
+          <Route path='/recipe/:id' exact element={<RecipeDetails />} />
         </Routes>
       </Router>
     </div>
