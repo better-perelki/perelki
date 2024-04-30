@@ -65,6 +65,7 @@ const AllRecipes = () => {
                             {drinks.map(drink => (
                                 <Drink
                                     key={drink.idDrink}
+                                    id={drink.idDrink}
                                     image={drink.strDrinkThumb}
                                     name={drink.strDrink}
                                 />
