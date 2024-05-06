@@ -39,16 +39,20 @@ const RecipeDetails = () => {
         return ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>);
     };
 
-
-     // In progress...
     return (
         <div className="recipe-details-container">
             {recipeDetails ? (
                 <div className="recipe-details">
                     <div className="recipe-image-container">
                         <img src={recipeDetails.strDrinkThumb} alt={recipeDetails.strDrink} />
+                        <h2>{recipeDetails.strDrink}</h2> {/* Nazwa drinka pod zdjęciem */}
                     </div>
-                    <h2>{recipeDetails.strName}</h2>
+                    <div className="recipe-details-content">
+                        <h3>Ingredients:</h3>
+                        <ul>{getIngredientsList(recipeDetails)}</ul>
+                        <h3>Instructions:</h3>
+                        <p>{recipeDetails.strInstructions}</p>
+                    </div>
                 </div>
             ) : (
                 <p>Loading recipe details...</p>
