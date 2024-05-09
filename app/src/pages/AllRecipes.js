@@ -63,12 +63,11 @@ const AllRecipes = () => {
 
                 return (
                     <div className="show-alphabet" key={letterObject.id} id={letter}>
-                        <div className='letters'>
-                            <h3>{letter}</h3>
-                        </div>
-
                         <div className='drinks'>
                             <div className='content'>
+                                <div className='letters'>
+                                    <h3>{letter}</h3>
+                                </div>
                                 <div className='drinksList'>
                                     {drinks.map(drink => (
                                         <Drink

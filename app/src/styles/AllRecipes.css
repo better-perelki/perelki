@@ -35,14 +35,6 @@
     text-align: center;
 }
 
-.AllRecipes .show-alphabet .letters h3 {
-    margin: 100px 0 10px;
-    font-size: 70px;
-    color: #F2E41D;
-    text-align: center;
-    padding-left: 50px;
-}
-
 .info {
     flex: 4;
 }
@@ -96,4 +88,11 @@
     justify-content: center;
     align-items: center;
     margin: auto;
+}
+
+.drinks .content .letters {
+    margin: 0 auto;
+    font-size: 70px;
+    color: #F2E41D;
+    text-align: center;
 }
