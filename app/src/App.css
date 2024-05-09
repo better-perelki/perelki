@@ -10,6 +10,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -31,18 +32,14 @@ h2 {
     text-transform: uppercase;
     font-weight: 700;
     font-size: 32px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 .drinksList {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    display: grid;
+    justify-content: space-between;
     align-items: stretch;
-    padding: 0;
-    margin: auto;
-    gap: 100px;
 }
 
 .drink {
@@ -52,10 +49,12 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 25%;
-    height: 475px;
+    min-width: 200px;
+    max-width: 400px;
+    height: auto;
     padding: 20px;
     text-align: center;
+    margin: 25px;
 }
 
 .drink img {
@@ -70,7 +69,6 @@ h2 {
 }
 
 .drink h3 {
-    margin: 0;
     font-size: 24px;
     font-weight: 700;
     color: var(--accent-color);
@@ -80,4 +78,29 @@ h2 {
     margin-top: 10px;
     font-size: 16px;
     color: var(--background-color);
+}
+
+@media only screen and (max-width: 600px) {
+    h2 {
+        font-size: 24px;
+    }
+
+    .drinksList {
+        grid-template-columns: repeat(1, 325px);
+
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .drinksList {
+        grid-template-columns: repeat(2, 325px);
+
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    .drinksList {
+        grid-template-columns: repeat(3, 375px);
+
+    }
 }

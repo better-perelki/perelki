@@ -11,16 +11,18 @@ function SearchByName() {
     return (
         <div className='searchByName'>
             <div className='search'>
+                <h2>What are you looking for?</h2>
+                <div className='searchInput'>
+                    <img src={searchIcon} alt='Search Icon' />
+                    <input
+                        placeholder='Enter the name of the drink'
+                        value={searchTerm}
+                        onChange={handleInputChange}
+                    />
+                </div>
+            </div>
+            <div className='drinks'>
                 <div className='content'>
-                    <h2>What are you looking for?</h2>
-                    <div className='searchInput'>
-                        <img src={searchIcon} alt='Search Icon' />
-                        <input
-                            placeholder='Enter the name of the drink'
-                            value={searchTerm}
-                            onChange={handleInputChange}
-                        />
-                    </div>
                     <div className='drinksList'>
                         {searchResults.map(drink => (
                             <Drink

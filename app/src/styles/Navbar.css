@@ -3,6 +3,7 @@
     height: 100px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--main-color);
     position: fixed;
     background-color: var(--background-color);
@@ -14,17 +15,18 @@
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
+    width: 100%;
 }
 
 .navbar .left {
+    z-index: 101;
+}
+
+.navbar .left,
+.navbar .right {
     height: 100%;
     display: flex;
     align-items: center;
-}
-
-.navbar .left img {
-    width: 70px;
-    margin: 50px;
 }
 
 .navbar .left a {
@@ -33,18 +35,91 @@
 
 .navbar a {
     color: var(--main-color);
-    font-size: 24px;
-    font-weight: 400;
+    font: 400 20px/1 'Poppins', sans-serif;
     text-decoration: none;
     text-transform: uppercase;
-    margin: 50px;
+    margin: 30px;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar a.active {
     color: var(--accent-color);
 }
 
 .navbar a.active {
-    color: var(--accent-color);
-    font-weight: 600;
+    font-weight: 500;
+}
+
+.navbar .left img {
+    width: 50px;
+    margin-left: 50px;
+}
+
+.navbar .right .menuIcon img {
+    width: 70px;
+    margin-right: 50px;
+}
+
+.menuIcon {
+    display: none;
+    cursor: pointer;
+}
+
+.menuLinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 1000px) {
+    .navbar .left img {
+        width: 50px;
+        margin-left: 35px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        height: 75px;
+    }
+
+    .navbar .center {
+        width: 100%;
+    }
+
+    .menuIcon {
+        display: block;
+    }
+
+    .navbar .right .menuIcon img {
+        width: 30px;
+        margin-right: 30px;
+    }
+
+    .navbar .left img {
+        width: 40px;
+        margin-left: 30px;
+    }
+
+    .menuLinks {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 100%;
+        margin: 0;
+    }
+
+    .menuLinks.active {
+        display: flex;
+        background-color: var(--background-color);
+        width: 100%;
+        border-bottom: 1px solid var(--main-color);
+    }
+
+    .navbar a {
+        margin: 15px 0;
+        font-size: 16px;
+    }
 }
