@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/SearchByIngredients.css'; // Zaimportuj plik CSS dla styli
+import '../styles/SearchByIngredients.css';
+import Drink from '../components/Drink.js'
+import GetIngredients from '../helpers/GetIngredients';
+
 
 function SearchByIngredients() {
     const [ingredients, setIngredients] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [foundCocktails, setFoundCocktails] = useState([]);
-    
+
 
     useEffect(() => {
         const fetchIngredients = async () => {
@@ -44,7 +47,7 @@ function SearchByIngredients() {
         newIngredients.splice(index, 1);
         setSelectedIngredients(newIngredients);
     };
-    
+
 
     const handleSearch = async () => {
         try {
@@ -52,9 +55,9 @@ function SearchByIngredients() {
                 alert('Select at least one ingredient before searching.');
                 return;
             }
-    
+
             const ingredientsQueryFormatted = selectedIngredients.map(ingredient => ingredient.replace(/\s/g, '_')).join(',');
-    
+
             // Wyślij zapytanie do API
             const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsQueryFormatted}`);
             if (!response.ok) {
@@ -68,7 +71,7 @@ function SearchByIngredients() {
             alert('An error occurred while searching for drinks. Please try again later.');
         }
     };
-    
+
     return (
         <div>
             <div className="search-by-ingredients-container">
@@ -91,32 +94,30 @@ function SearchByIngredients() {
                     <button onClick={handleSearch}>Search</button>
                 </div>
             </div>
-    
-            <div className="cocktails-section">
-                {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
-                    <div>
-                        <h2>Found drinks:</h2>
-                        <div className="cocktails-container">
-                            {foundCocktails.map(cocktail => (
-                                <Link to={`/recipe/${cocktail.idDrink}`} key={cocktail.idDrink} className="cocktail-link">
-                                    <div className="cocktail">
-                                        <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} />
-                                        <h3>{cocktail.strDrink}</h3>
-                                    </div>
-                                </Link>
-                            ))}
+
+            <div className="drinks">
+                <div className='content'>
+                    {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
+                        <div className='content'>
+                            <h2>Found drinks:</h2>
+                            <div className='drinksList'>
+                                {foundCocktails.map(drink => (
+                                    <Drink
+                                        key={drink.idDrink}
+                                        id={drink.idDrink}
+                                        image={drink.strDrinkThumb}
+                                        name={drink.strDrink}
+                                        ingredients={GetIngredients(drink)}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
+                </div>
+
             </div>
         </div>
     );
-    
-    
-    
-
-
-
 }
 
 export default SearchByIngredients;
