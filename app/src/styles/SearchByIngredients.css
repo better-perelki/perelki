@@ -1,28 +1,112 @@
 .search-by-ingredients-container {
-    margin-top: 150px; 
-    background-color: #f0f0f0; 
-    padding: 30px; 
-    margin-left: 5%; 
-    width: 15%; 
-    border-radius: 10px; 
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;
 }
 
-.ingredients-section, .cocktails-section {
+.ingredients-section {
+    width: 70%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.ingredients-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.searchInput {
+    margin-bottom: 20px;
+}
+
+.searchInput input {
+    width: 80%;
+    height: 40px;
+    padding: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.searchResults {
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.searchResult {
+    cursor: pointer;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+}
+
+.selected-ingredients-section {
+    width: 70%;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.selected-ingredients-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.selected-ingredient-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.selected-ingredient {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    margin: 8px;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    font-size: 16px;
+}
+
+.selected-ingredient button {
+    margin-left: 8px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff5555;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.selected-ingredient button:hover {
+    background-color: #e04040;
+}
+
+.cocktails-section {
+    margin-right: 0; /* Usuwamy odstęp dla ostatniego segmentu */
     flex: 1;
     padding: 20px; /* Dodajemy wypełnienie dla estetyki */
     margin-right: 20px; /* Dodajemy odstęp między segmentami */
 }
 
-.cocktails-section {
-    margin-right: 0; /* Usuwamy odstęp dla ostatniego segmentu */
-}
-
 .cocktails-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Siatka z automatycznym dopasowaniem szerokości kolumn */
+    grid-template-columns: repeat(3, 1fr); /* Trzy kolumny o jednakowej szerokości */
     gap: 25px; /* Odstęp między drinkami */
-   
+    justify-content: center; /* Wyśrodkowanie kolumn w kontenerze */
+    margin-top: 20px; /* Dodatkowy margines na górze */
 }
 
 .cocktail {
@@ -46,7 +130,17 @@
 }
 
 .cocktail img {
-    max-width: 90%;
+    width: 200px;
     border-radius: 10px; 
     height: auto;
+}
+
+img {
+    margin-top: 15px;
+    width: 60px; /* Ustaw szerokość na 100 pikseli */
+    height: auto; /* Automatycznie dostosuj wysokość zachowując proporcje */
+}
+
+img:hover {
+    transform: scale(1.1); /* Przy najechaniu myszą, zwiększ rozmiar obrazka o 10% */
 }
