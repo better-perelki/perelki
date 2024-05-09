@@ -57,6 +57,11 @@ h2 {
     margin: 25px;
 }
 
+.drink a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .drink img {
     width: 100%;
     object-fit: cover;

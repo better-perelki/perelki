@@ -15,8 +15,6 @@
     margin: 0 50px 50px 50px;
 }
 
-
-
 .AllRecipes h1 {
     color: var(--accent-color);
     text-transform: lowercase;
@@ -45,71 +43,6 @@
     padding-left: 50px;
 }
 
-/* Styl kontenera dla listy napojów */
-.drinksList {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 20px; /* Odstęp między elementami */
-    box-sizing: border-box; /* Zapobieganie dodawaniu marginesów i paddingu do szerokości */
-}
-
-/* Styl pojedynczego napoju */
-.drink {
-    background-color: var(--container-color);
-   
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: calc(25% - 20px); /* Szerokość elementu (uwzględniając odstępy) */
-    height: 475px;
-    padding: 20px;
-    text-align: center;
-    box-sizing: border-box; /* Zapobieganie dodawaniu marginesów i paddingu do szerokości */
-    margin-bottom: 50px; /* Odstęp na dole każdego elementu */
-    margin-left: 100px; /* Margines z lewej strony */
-    margin-right: 25px; /* Margines z prawej strony */
-}
-
-/* Styl obrazka w napoju */
-.drink img {
-    width: 300px;
-    height: 350px; /* Wysokość obrazka */
-    object-fit: cover; /* Dostosowanie obrazka do wymiarów kontenera */
-    margin-bottom: 15px;
-    border-radius: 25px;
-}
-
-/* Styl tytułu napoju */
-.drink h3 {
-    margin: 0;
-    font-size: 35px;
-    font-weight: 700;
-    text-align: center;
-    color: var(--accent-color);
-}
-
-@media (max-width: 1200px) {
-    .drink {
-        width: calc(33.33% - 20px); /* Szerokość elementu dla ekranów o maksymalnej szerokości 1200px (trzy elementy na wiersz) */
-    }
-}
-
-@media (max-width: 800px) {
-    .drink {
-        width: calc(50% - 20px); /* Szerokość elementu dla ekranów o maksymalnej szerokości 800px (dwa elementy na wiersz) */
-    }
-}
-
-@media (max-width: 600px) {
-    .drink {
-        width: calc(100% - 20px); /* Szerokość elementu dla bardzo małych ekranów (jeden element na wiersz) */
-    }
-}
-
 .info {
     flex: 4;
 }
@@ -118,7 +51,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px; /* Dodatkowy margines na dole paska */
+    margin-bottom: 20px;
+    /* Dodatkowy margines na dole paska */
 }
 
 /* Styl dla odnośników w pasku z literkami */
@@ -128,15 +62,20 @@
     margin: 0 5px;
     font-size: 18px;
     font-weight: bold;
-    color: #fff; /* Kolor tekstu */
-    background-color: #262624; /* Kolor tła */
+    color: #fff;
+    /* Kolor tekstu */
+    background-color: #262624;
+    /* Kolor tła */
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Animacja zmiany koloru tła */
+    transition: background-color 0.3s ease;
+    /* Animacja zmiany koloru tła */
 }
 
 /* Styl dla odnośników po najechaniu kursorem */
-.alphabet-link:hover { 
-    background-color: #F2E41D; ; /* Kolor tła po najechaniu */
+.alphabet-link:hover {
+    background-color: #F2E41D;
+    ;
+    /* Kolor tła po najechaniu */
 }
