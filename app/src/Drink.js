@@ -1,33 +1,32 @@
-import React from 'react';
-
-class Drink extends React.Component  {
-  constructor() {
-    this._id = 0;
-    this._name = '';
-    this._alcoholic = false;
-    this._ingredients = [];
-    this._recipe = '';
+class Drink {
+  constructor(id = 0, name = null, alcoholic = false, ingredients = null, recipe = "") {
+    this.id = id;
+    this.name = name;
+    this.alcoholic = alcoholic;
+    this.ingredients = ingredients;
+    this.recipe = recipe;
   }
 
-  getId() {
-    return this._id;
+  getID() {
+    return this.id;
   }
 
   getName() {
-    return this._name;
+    return this.name;
   }
 
   getAlcoholic() {
-    return this._alcoholic;
+    return this.alcoholic;
   }
 
   getIngredients() {
-    return this._ingredients;
+    return this.ingredients;
   }
 
   getRecipe() {
-    return this._recipe;
+    return this.recipe;
   }
 }
 
-export default Drink;
+module.exports = Drink;
+  

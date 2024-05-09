@@ -1,40 +1,46 @@
-import React from 'react';
+const Drink = require('./Drink');
 
-class DrinkBuilder extends React.Component{
+class DrinkBuilder {
     constructor() {
-        super();
-    }
-  
-    setID(id) {
-      // To be implemented
-      return this;
-    }
-  
-    setName(name) {
-      // To be implemented
-      return this;
-    }
-  
-    setAlcoholic(alcoholic) {
-      // To be implemented
-      return this;
-    }
-  
-    setIngredients(ingredients) {
-      // To be implemented
-      return this;
-    }
-  
-    setRecipe(recipe) {
-      // To be implemented
-      return this;
-    }
-  
-    build() {
-      // To be implemented
-      return this._drink;
-    }
-  }
+            this.id = 0;
+            this.name = '';
+            this.alcoholic = false;
+            this.ingredients = [];
+            this.recipe = '';
+        }
+    
 
+    setID(id_) {
+        this.id = id_;
+        if (id_ < 0) this.id = 0;
+        return this; 
+    }
+
+    setName(name_) {
+        this.name = name_;
+        return this;
+    }
+
+    setAlcoholic(alcoholic_) {
+        this.alcoholic = alcoholic_;
+        return this;
+    }
+
+    setIngredients(ingredients_) {
+        this.ingredients = ingredients_;
+        return this;
+    }
+
+    setRecipe(recipe_) {
+        this.recipe = recipe_;
+        return this;
+    }
+
+    build() {
+        const drink = new Drink(this.id, this.name, this.alcoholic, this.ingredients, this.recipe);
+        return drink;
+    }
+
+}
 
 module.exports = DrinkBuilder;

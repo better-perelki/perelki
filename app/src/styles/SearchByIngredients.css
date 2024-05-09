@@ -1,0 +1,52 @@
+.search-by-ingredients-container {
+    margin-top: 150px; 
+    background-color: #f0f0f0; 
+    padding: 30px; 
+    margin-left: 5%; 
+    width: 15%; 
+    border-radius: 10px; 
+    display: flex;
+}
+
+.ingredients-section, .cocktails-section {
+    flex: 1;
+    padding: 20px; /* Dodajemy wypełnienie dla estetyki */
+    margin-right: 20px; /* Dodajemy odstęp między segmentami */
+}
+
+.cocktails-section {
+    margin-right: 0; /* Usuwamy odstęp dla ostatniego segmentu */
+}
+
+.cocktails-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Siatka z automatycznym dopasowaniem szerokości kolumn */
+    gap: 25px; /* Odstęp między drinkami */
+   
+}
+
+.cocktail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Wyśrodkowanie zawartości w pionie */
+    text-align: center;
+    padding: 50px; /* Dodajemy wypełnienie dla estetyki */
+    background-color: #f0f0f0; 
+    width: 200px; /* Szerokość kontenera */
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Odstęp między kontenerami */
+}
+
+.cocktail-link {
+    color: black; /* Ustawienie koloru tekstu na czarny */
+    width: 86%; /* Szerokość kontenera */
+    height: 90%;
+}
+
+.cocktail img {
+    max-width: 90%;
+    border-radius: 10px; 
+    height: auto;
+}

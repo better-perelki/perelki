@@ -25,6 +25,7 @@ function SearchByName() {
                         {searchResults.map(drink => (
                             <Drink
                                 key={drink.idDrink}
+                                id={drink.idDrink}
                                 image={drink.strDrinkThumb}
                                 name={drink.strDrink}
                                 ingredients={GetIngredients(drink)}
