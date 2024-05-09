@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/SearchByIngredients.css'; // Zaimportuj plik CSS dla styli
+import '../styles/SearchByIngredients.css';
+import searchIcon from '../assets/search2.png'
 
 function SearchByIngredients() {
     const [ingredients, setIngredients] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [foundCocktails, setFoundCocktails] = useState([]);
-    
 
     useEffect(() => {
         const fetchIngredients = async () => {
             try {
-                const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/list.php?i=list');
+                const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
                 if (!response.ok) {
                     throw new Error('Failed to fetch ingredients');
                 }
                 const data = await response.json();
-                setIngredients(data.drinks.map(drink => drink.strIngredient1)); // Zapisujemy tylko nazwy składników
+                const ingredientList = data.drinks.map(drink => drink.strIngredient1.toLowerCase());
+                setIngredients(ingredientList);
             } catch (error) {
                 console.error('Error fetching ingredients:', error);
             }
@@ -25,26 +27,26 @@ function SearchByIngredients() {
         fetchIngredients();
     }, []);
 
-    const handleAddIngredient = (event) => {
-        const ingredient = event.target.value;
-        // Sprawdź, czy wybrany składnik nie jest pusty
-        if (ingredient.trim() !== '') {
-            // Sprawdź, czy wybrany składnik nie został już dodany
-            if (!selectedIngredients.includes(ingredient)) {
-                // Dodaj nowy składnik do listy wybranych składników
-                setSelectedIngredients([...selectedIngredients, ingredient]);
-            } else {
-                alert('This component has already been added.');
-            }
-        }
+    const handleInputChange = (e) => {
+        setSearchTerm(e.target.value.toLowerCase());
     };
 
-    const handleRemoveIngredient = (index) => {
-        const newIngredients = [...selectedIngredients];
-        newIngredients.splice(index, 1);
+    const handleAddIngredient = (ingredient) => {
+        if (!selectedIngredients.includes(ingredient)) {
+            setSelectedIngredients([...selectedIngredients, ingredient]);
+        }
+        setSearchTerm('');
+    };
+
+    const handleRemoveIngredient = (ingredient) => {
+        const newIngredients = selectedIngredients.filter(item => item !== ingredient);
         setSelectedIngredients(newIngredients);
     };
-    
+
+    const filteredIngredients = ingredients.filter(ingredient => {
+        const words = ingredient.split(' ');
+        return words.some(word => word.toLowerCase().startsWith(searchTerm));
+    });
 
     const handleSearch = async () => {
         try {
@@ -52,10 +54,10 @@ function SearchByIngredients() {
                 alert('Select at least one ingredient before searching.');
                 return;
             }
-    
+
             const ingredientsQueryFormatted = selectedIngredients.map(ingredient => ingredient.replace(/\s/g, '_')).join(',');
-    
-            // Wyślij zapytanie do API
+
+
             const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsQueryFormatted}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch cocktails');
@@ -68,30 +70,51 @@ function SearchByIngredients() {
             alert('An error occurred while searching for drinks. Please try again later.');
         }
     };
-    
+
     return (
-        <div>
-            <div className="search-by-ingredients-container">
-                <div className="ingredients-section">
-                    <h2>Choose ingredients:</h2>
-                    <select onChange={handleAddIngredient}>
-                        <option value="">Choose ingredients...</option>
-                        {ingredients.map((ingredient, index) => (
-                            <option key={index} value={ingredient}>{ingredient}</option>
-                        ))}
-                    </select>
-                    <div>
-                        {selectedIngredients.map((ingredient, index) => (
-                            <div key={index}>
+        <div className="search-by-ingredients-container">
+            <div className="ingredients-section">
+                <h2>Choose ingredients:</h2>
+                <div className="searchInput">
+                    <input
+                        type="text"
+                        placeholder="Search ingredients..."
+                        value={searchTerm}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                {searchTerm && (
+                    <div className="searchResults">
+                        {filteredIngredients.map((ingredient, index) => (
+                            <div
+                                key={index}
+                                className="searchResult"
+                                onClick={() => handleAddIngredient(ingredient)}
+                            >
                                 {ingredient}
-                                <button onClick={() => handleRemoveIngredient(index)}>Delete</button>
                             </div>
                         ))}
                     </div>
-                    <button onClick={handleSearch}>Search</button>
+                )}
+            </div>
+
+            <div className="selected-ingredients-section">
+                <h2>Selected ingredients:</h2>
+                <div className="selected-ingredient-list">
+                    {selectedIngredients.map((ingredient, index) => (
+                        <div key={index} className="selected-ingredient">
+                            {ingredient}
+                            <button onClick={() => handleRemoveIngredient(ingredient)}>
+                                Remove
+                            </button>
+                        </div>
+                    ))}
+
                 </div>
             </div>
-    
+            <div>
+                <img src={searchIcon} alt="Search" onClick={handleSearch} />
+            </div>
             <div className="cocktails-section">
                 {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
                     <div>
@@ -111,12 +134,6 @@ function SearchByIngredients() {
             </div>
         </div>
     );
-    
-    
-    
-
-
-
 }
 
 export default SearchByIngredients;
