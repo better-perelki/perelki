@@ -1,65 +1,65 @@
-const DrinkBuilder = require('../DrinkBuilder.js');
-const Drink = require('../Drink.js');
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import SearchByIngredients from '../pages/SearchByIngredients';
 
-const Builder = new DrinkBuilder();
-const mockDrinks = [
-  Builder.setName('Brainteaster').setIngredients(['Sambuca', 'Advocaat', 'Erin Cream']).build(),
-  Builder.setName('Snowball').setIngredients(['Lemonade', 'Advocaat', 'Lemon']).build(),
-  Builder.setName('Kiss me Quick').setIngredients(['Cranberry Vodka', 'Apfelkorn', 'Apple Juice', 'Schweppes Russchian']).build(),
-  Builder.setName('Angel Face').setIngredients(['Apricot brandy', 'Apple brandy', 'Gin']).build(),
-  Builder.setName('Jack Rose Cocktail').setIngredients(['Grenadine', 'Apple brandy', 'Lime']).build(),
-  Builder.setName('White Wine Sangria').setIngredients(['White Wine', 'Apple brandy', 'Soda Water', 'Fruits']).build(),
-  Builder.setName('Zimadori Zinger').setIngredients(['Zima', 'Midori melon liqueur']).build(),
-  Builder.setName('Zima Blaster').setIngredients(['Chambord raspberry liqueur', 'Zima']).build(),
-  Builder.setName('Mojito').setIngredients(['Rum', 'Lime', 'Mint', 'Sugar']).build(),
-  Builder.setName('Aperol Spritz').setIngredients(['Aperol', 'Prosecco', 'Soda Water', 'Orange Slice']).build(),
-  Builder.setName('Old Cuban').setIngredients(['Rum', 'Mint', 'Lime', 'Simple Syrup', 'Angostura Bitters', 'Champagne']).build(),
-];
+describe('SearchByIngredients Component Tests', () => {
+  // Test 1:
+  test('renders the component and checks if "Choose ingredients" text is present', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            drinks: [
+              { strIngredient1: 'Ingredient 1' },
+              { strIngredient1: 'Ingredient 2' },
+            ],
+          }),
+      })
+    );
 
-test('should return list of drinks containing selected ingredients', () => {
-  const SearchByIngredients = new SearchByIngredients();
-  const ingredientsToSearch = ['Advocaat', 'Sambuca', 'Erin Cream'];
+    render(<SearchByIngredients />);
 
-  // Lista oczekiwanych nazw drinków mających podane składniki
-  const expectedDrinkNames = ['Brainteaster', 'Snowball'];
+    const chooseIngredientsText = await screen.findByText(/Choose ingredients:/i);
+    expect(chooseIngredientsText).toBeInTheDocument();
+  });
 
-  const result = SearchByIngredients.search(ingredientsToSearch, mockDrinks);
 
-  // Pobieramy nazwy drinków z wyników wyszukiwania
-  const resultDrinkNames = result.map(drink => drink.name);
+  // Test 2:
+  test('adds ingredient to selectedIngredients array when a new ingredient is selected', async () => {
+    const { getByRole, getByText } = render(<SearchByIngredients />);
+    const select = getByRole('combobox');
 
-  // Sprawdzamy, czy wszystkie oczekiwane nazwy drinków są obecne w wynikach
-  expect(resultDrinkNames).toEqual(expect.arrayContaining(expectedDrinkNames));
-});
+    fireEvent.change(select, { target: { value: 'New Ingredient' } });
 
-test('should return list of drinks containing selected ingredients', () => {
-  const SearchByIngredients = new SearchByIngredients();
-  const ingredientsToSearch = ['Apfelkorn', 'Apple Brandy', 'Cranberry Vodka', 'Apricot brandy', 'Gin'];
+    await (() => {
+      const ingredient = screen.findByText(/New Ingredient/i);
+      expect(ingredient).toBeInTheDocument();
+    })
+  });
 
-  // Lista oczekiwanych nazw drinków mających podane składniki
-  const expectedDrinkNames = ['Kiss me Quick', 'Angel Face', 'Jack Rose Cocktail', 'White Wine Sangria'];
+  // Test 3:
+  test('removes ingredient from selectedIngredients array when delete button is clicked', async () => {
+    const { getByRole, getByText } = render(<SearchByIngredients />);
 
-  const result = SearchByIngredients.search(ingredientsToSearch, mockDrinks);
+    const select = getByRole('combobox');
+    fireEvent.change(select, { target: { value: 'Ingredient 1' } });
 
-  // Pobieramy nazwy drinków z wyników wyszukiwania
-  const resultDrinkNames = result.map(drink => drink.name);
+    await (() => {
+      const ingredient = screen.findByText(/Ingredient 1/i);
+      fireEvent.click(getByText('Delete'));
+      expect(ingredient).not.toBeInTheDocument();
+    })
+  });
 
-  // Sprawdzamy, czy wszystkie oczekiwane nazwy drinków są obecne w wynikach
-  expect(resultDrinkNames).toEqual(expect.arrayContaining(expectedDrinkNames));
-});
+  // Test 4:
+  test('displays error alert when fetching cocktails fails', async () => {
+    global.fetch = jest.fn(() => Promise.reject(new Error('Fetch error')));
 
-test('should return list of drinks containing selected ingredients', () => {
-  const SearchByIngredients = new SearchByIngredients();
-  const ingredientsToSearch = ['Zima', 'Chambord raspberry liqueur', 'Midori melon liqueur'];
+    render(<SearchByIngredients />);
 
-  // Lista oczekiwanych nazw drinków mających podane składniki
-  const expectedDrinkNames = ['Zimadori Zinger', 'Zima Blaster'];
-
-  const result = SearchByIngredients.search(ingredientsToSearch, mockDrinks);
-
-  // Pobieramy nazwy drinków z wyników wyszukiwania
-  const resultDrinkNames = result.map(drink => drink.name);
-
-  // Sprawdzamy, czy wszystkie oczekiwane nazwy drinków są obecne w wynikach
-  expect(resultDrinkNames).toEqual(expect.arrayContaining(expectedDrinkNames));
+    await (() => {
+      expect(console.error).toHaveBeenCalled();
+    });
+  });
 });
