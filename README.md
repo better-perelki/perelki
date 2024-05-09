@@ -1,3 +1,6 @@
+
+import logo from 'app/src/assets/logo.png'; imports the image into your React component.
+
 ### Bottoms up
 
 Bottoms up is a simple yet powerful application designed to help you discover a wide variety of cocktails based on the ingredients you have on hand. Whether you're hosting a party, experimenting with mixology, or simply craving a refreshing beverage, Bottoms up has you covered!
