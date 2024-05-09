@@ -1,4 +1,12 @@
-.searchByName,
+.searchByName {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
 .search {
     width: 100%;
     display: flex;
@@ -7,14 +15,22 @@
     margin: auto;
 }
 
-.drinks,
-.drinks .content {
+.drinks {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 25px 0;
+}
+
+.drinks .content {
+    margin: 50px auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .search h2 {
@@ -27,9 +43,9 @@
     height: 48px;
     border: none;
     border-radius: 25px;
-    background-color: var(--container-color);
+    background-color: #F2F2F2;
     padding: 0 55px;
-    margin-bottom: 25px;
+    margin: 0 auto 25px auto;
     font-family: 'Poppins', sans-serif;
 }
 
