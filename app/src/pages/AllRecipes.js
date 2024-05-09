@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/AllRecipes.css';
 import alphabet from '../data/Alphabet.json';
 import Drink from '../components/Drink';
+import GetIngredients from '../helpers/GetIngredients';
 
 const AllRecipes = () => {
     const [drinksByLetter, setDrinksByLetter] = useState({});
@@ -13,13 +14,13 @@ const AllRecipes = () => {
                 const data = await response.json();
                 setDrinksByLetter((prevDrinks) => ({
                     ...prevDrinks,
-                    [letter]: data.drinks || [] 
+                    [letter]: data.drinks || []
                 }));
             } catch (error) {
                 console.error(`Error fetching drinks for letter ${letter}:`, error);
                 setDrinksByLetter((prevDrinks) => ({
                     ...prevDrinks,
-                    [letter]: [] 
+                    [letter]: []
                 }));
             }
         };
@@ -39,8 +40,10 @@ const AllRecipes = () => {
 
     return (
         <div className="AllRecipes">
-            <h2>BOTTOMS UP!!!</h2>
-            <h1>Well, fill your glass first...</h1>
+            <div className='content'>
+                <h2>BOTTOMS UP!!!</h2>
+                <h1>Well, fill your glass first...</h1>
+            </div>
 
             <div className="alphabet-bar">
                 {alphabet.letters.map((letterObject) => (
@@ -57,20 +60,30 @@ const AllRecipes = () => {
             {alphabet.letters.map((letterObject) => {
                 const letter = letterObject.letter;
                 const drinks = drinksByLetter[letter] || [];
-    
+
                 return (
                     <div className="show-alphabet" key={letterObject.id} id={letter}>
-                        <h3>{letter}</h3>
-                        <div className='drinksList'>
-                            {drinks.map(drink => (
-                                <Drink
-                                    key={drink.idDrink}
-                                    id={drink.idDrink}
-                                    image={drink.strDrinkThumb}
-                                    name={drink.strDrink}
-                                />
-                            ))}
+                        <div className='letters'>
+                            <h3>{letter}</h3>
                         </div>
+
+                        <div className='drinks'>
+                            <div className='content'>
+                                <div className='drinksList'>
+                                    {drinks.map(drink => (
+                                        <Drink
+                                            key={drink.idDrink}
+                                            id={drink.idDrink}
+                                            image={drink.strDrinkThumb}
+                                            name={drink.strDrink}
+                                            ingredients={GetIngredients(drink)}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 );
             })}
