@@ -95,37 +95,37 @@
 }
 
 .cocktails-section {
-    margin-right: 0; /* Usuwamy odstęp dla ostatniego segmentu */
+    margin-right: 0;
     flex: 1;
-    padding: 20px; /* Dodajemy wypełnienie dla estetyki */
-    margin-right: 20px; /* Dodajemy odstęp między segmentami */
+    padding: 20px; 
+    margin-right: 20px; 
 }
 
 .cocktails-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Trzy kolumny o jednakowej szerokości */
-    gap: 25px; /* Odstęp między drinkami */
-    justify-content: center; /* Wyśrodkowanie kolumn w kontenerze */
-    margin-top: 20px; /* Dodatkowy margines na górze */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 25px; 
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .cocktail {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* Wyśrodkowanie zawartości w pionie */
+    justify-content: center; 
     text-align: center;
-    padding: 50px; /* Dodajemy wypełnienie dla estetyki */
+    padding: 50px; 
     background-color: #f0f0f0; 
-    width: 200px; /* Szerokość kontenera */
+    width: 200px; 
     height: 200px;
     border-radius: 10px;
-    margin-bottom: 20px; /* Odstęp między kontenerami */
+    margin-bottom: 20px; 
 }
 
 .cocktail-link {
-    color: black; /* Ustawienie koloru tekstu na czarny */
-    width: 86%; /* Szerokość kontenera */
+    color: black; 
+    width: 86%; 
     height: 90%;
 }
 
@@ -137,10 +137,10 @@
 
 img {
     margin-top: 15px;
-    width: 60px; /* Ustaw szerokość na 100 pikseli */
-    height: auto; /* Automatycznie dostosuj wysokość zachowując proporcje */
+    width: 60px; 
+    height: auto; 
 }
 
 img:hover {
-    transform: scale(1.1); /* Przy najechaniu myszą, zwiększ rozmiar obrazka o 10% */
+    transform: scale(1.1); 
 }
