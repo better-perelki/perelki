@@ -25,6 +25,7 @@ body {
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
     width: 100%;
+    background-color: var(--background-color);
 }
 
 h2 {
