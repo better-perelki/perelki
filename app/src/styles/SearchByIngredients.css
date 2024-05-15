@@ -2,59 +2,50 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 120px;
+    justify-content: center;
+    width: 100%;
+}
+
+.search-by-ingredients-container .content {
+    margin: 130px 50px 50px 50px;
 }
 
 .ingredients-section {
-    width: 70%;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.ingredients-section h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.searchInput {
-    margin-bottom: 20px;
-}
-
-.ingredients-section .searchInput input {
-    width: 80%;
-    height: 40px;
-    padding: 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.searchResults {
     width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
 }
 
-.searchResult {
+.searchResults,
+.selected-ingredient-list {
+    width: 100%;
+    justify-content: center;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.searchResult,
+.selected-ingredient {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 50px;
+    border: solid var(--container-color) 1px;
+    color: var(--container-color);
+}
+
+.searchResult:hover {
     cursor: pointer;
-    padding: 8px;
-    margin-bottom: 8px;
-    border-radius: 5px;
-    background-color: #e0e0e0;
+    border: solid var(--main-color) 1px;
+    color: var(--main-color);
 }
 
 .selected-ingredients-section {
-    width: 70%;
-    padding: 20px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 100%;
 }
 
 .selected-ingredients-section h2 {
@@ -62,101 +53,47 @@
     margin-bottom: 20px;
 }
 
-.selected-ingredient-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .selected-ingredient {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 8px 12px;
-    margin: 8px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    font-size: 16px;
 }
 
 .selected-ingredient button {
     margin-left: 8px;
-    padding: 6px 10px;
     border: none;
-    border-radius: 5px;
-    background-color: #ff5555;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
+    background-color: transparent;
+    width: 16px;
+}
+
+.selected-ingredient button img {
+    width: 100%;
+    height: auto;
 }
 
 .selected-ingredient button:hover {
-    background-color: #e04040;
+    cursor: pointer;
 }
 
-.cocktails-section {
-    margin-right: 0;
-    /* Usuwamy odstęp dla ostatniego segmentu */
-    flex: 1;
-    padding: 20px;
-    /* Dodajemy wypełnienie dla estetyki */
-    margin-right: 20px;
-    /* Dodajemy odstęp między segmentami */
-}
-
-.cocktails-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    /* Trzy kolumny o jednakowej szerokości */
-    gap: 25px;
-    /* Odstęp między drinkami */
-    justify-content: center;
-    /* Wyśrodkowanie kolumn w kontenerze */
-    margin-top: 20px;
-    /* Dodatkowy margines na górze */
-}
-
-.cocktail {
+.searchIcon {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    /* Wyśrodkowanie zawartości w pionie */
-    text-align: center;
-    padding: 50px;
-    /* Dodajemy wypełnienie dla estetyki */
-    background-color: #f0f0f0;
-    width: 200px;
-    /* Szerokość kontenera */
-    height: 200px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    /* Odstęp między kontenerami */
-}
-
-.cocktail-link {
-    color: black;
-    /* Ustawienie koloru tekstu na czarny */
-    width: 86%;
-    /* Szerokość kontenera */
-    height: 90%;
-}
-
-.cocktail img {
-    width: 200px;
-    border-radius: 10px;
-    height: auto;
 }
 
 .searchIcon img {
-    margin-top: 15px;
+    margin-top: 20px;
     width: 100px;
-    /* Ustaw szerokość na 100 pikseli */
     height: auto;
-    /* Automatycznie dostosuj wysokość zachowując proporcje */
 }
 
 .searchIcon img:hover {
     transform: scale(1.1);
-    /* Przy najechaniu myszą, zwiększ rozmiar obrazka o 10% */
+}
+
+.drinks {
+    margin-top: 32px;
+}
+
+.drinks .content {
+    margin-top: 0;
 }

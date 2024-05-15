@@ -37,7 +37,7 @@
     margin: 130px 0 10px;
 }
 
-.search input {
+/* .search input {
     width: 475px;
     margin-right: 20px;
     height: 48px;
@@ -51,18 +51,18 @@
 
 .search input:focus {
     outline: none;
-}
+} */
 
-.search .searchInput {
+/* .search .searchInput {
     position: relative;
-}
+} */
 
-.search .searchInput img {
+/* .search .searchInput img {
     position: absolute;
     top: 20%;
     left: 25px;
     width: 20px;
-}
+} */
 
 @media only screen and (max-width: 600px) {
     .search input {

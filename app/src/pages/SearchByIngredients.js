@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/SearchByIngredients.css';
-import searchIcon from '../assets/search2.png'
 import Drink from '../components/Drink.js'
-import GetIngredients from '../helpers/GetIngredients';
+import search from '../assets/search.png';
+import removeHovered from '../assets/remove.png'
+import remove from '../assets/remove1.png'
 
 function SearchByIngredients() {
     const [ingredients, setIngredients] = useState([]);
@@ -50,22 +51,25 @@ function SearchByIngredients() {
         return words.some(word => word.toLowerCase().startsWith(searchTerm));
     });
 
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    }
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    }
+
     const handleSearch = async () => {
         try {
-            if (selectedIngredients.length === 0) {
-                alert('Select at least one ingredient before searching.');
-                return;
-            }
-
             const ingredientsQueryFormatted = selectedIngredients.map(ingredient => ingredient.replace(/\s/g, '_')).join(',');
-
-
+            console.log(ingredientsQueryFormatted);
             const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsQueryFormatted}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch cocktails');
             }
             const data = await response.json();
-
             setFoundCocktails(data.drinks);
         } catch (error) {
             console.error('Error searching cocktails:', error);
@@ -73,69 +77,78 @@ function SearchByIngredients() {
         }
     };
 
+    useEffect(() => {
+        handleSearch();
+    }, [selectedIngredients]);
+
     return (
         <div className="search-by-ingredients-container">
-            <div className="ingredients-section">
-                <h2>Choose ingredients:</h2>
-                <div className="searchInput">
-                    <input
-                        type="text"
-                        placeholder="Search ingredients..."
-                        value={searchTerm}
-                        onChange={handleInputChange}
-                    />
-                </div>
-                {searchTerm && (
-                    <div className="searchResults">
-                        {filteredIngredients.map((ingredient, index) => (
-                            <div
-                                key={index}
-                                className="searchResult"
-                                onClick={() => handleAddIngredient(ingredient)}
-                            >
-                                {ingredient}
-                            </div>
-                        ))}
+            <div className='content'>
+                <div className="ingredients-section">
+                    <h2>Choose ingredients:</h2>
+                    <div className="searchInput">
+                        <img src={search} alt='Search Icon' />
+                        <input
+                            type="text"
+                            placeholder="Search ingredients..."
+                            value={searchTerm}
+                            onChange={handleInputChange}
+                        />
                     </div>
-                )}
-            </div>
-
-            <div className="selected-ingredients-section">
-                <h2>Selected ingredients:</h2>
-                <div className="selected-ingredient-list">
-                    {selectedIngredients.map((ingredient, index) => (
-                        <div key={index} className="selected-ingredient">
-                            {ingredient}
-                            <button onClick={() => handleRemoveIngredient(ingredient)}>
-                                Remove
-                            </button>
-                        </div>
-                    ))}
-
-                </div>
-            </div>
-            <div class="searchIcon">
-                <img src={searchIcon} alt="Search" onClick={handleSearch} />
-            </div>
-            <div className="drinks">
-                <div className='content'>
-                    {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
-                        <div className='content'>
-                            <h2>Found drinks:</h2>
-                            <div className='drinksList'>
-                                {foundCocktails.map(drink => (
-                                    <Drink
-                                        key={drink.idDrink}
-                                        id={drink.idDrink}
-                                        image={drink.strDrinkThumb}
-                                        name={drink.strDrink}
-                                        ingredients={GetIngredients(drink)}
-                                    />
-                                ))}
-                            </div>
+                    {searchTerm && (
+                        <div className="searchResults">
+                            {filteredIngredients.map((ingredient, index) => (
+                                <div
+                                    key={index}
+                                    className="searchResult"
+                                    onClick={() => handleAddIngredient(ingredient)}
+                                >
+                                    {ingredient}
+                                </div>
+                            ))}
                         </div>
                     )}
                 </div>
+
+                {selectedIngredients.length > 0 && (
+                    <div>
+                        <div className="selected-ingredients-section">
+                            <h2>Selected ingredients:</h2>
+                            <div className="selected-ingredient-list">
+                                {selectedIngredients.map((ingredient, index) => (
+                                    <div key={index} className="selected-ingredient">
+                                        {ingredient}
+                                        <button onClick={() => handleRemoveIngredient(ingredient)}
+                                            onMouseEnter={handleMouseEnter}
+                                            onMouseLeave={handleMouseLeave}>
+                                            <img src={isHovered ? removeHovered : remove} />
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="drinks">
+                            <div className='content'>
+                                {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
+                                    <div className='content'>
+                                        <h2>Found drinks:</h2>
+                                        <div className='drinksList'>
+                                            {foundCocktails.map(drink => (
+                                                <Drink
+                                                    key={drink.idDrink}
+                                                    id={drink.idDrink}
+                                                    image={drink.strDrinkThumb}
+                                                    name={drink.strDrink}
+                                                // ingredients={GetIngredients(drink)}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
