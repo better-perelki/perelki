@@ -1,14 +1,17 @@
 .recipe-details-container {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 130px 50px 50px 50px;
+    position: relative;
 }
 
 .recipe-details {
     width: 100%;
-    margin: 150px 50px 50px 50px;
     display: flex;
+    margin-top: 50px;
 }
 
 .recipe-details-content {
@@ -47,6 +50,17 @@ p {
     width: 100%;
     height: auto;
     border-radius: 8px;
+}
+
+.button {
+    position: absolute;
+    top: 140px;
+    left: 50px;
+}
+
+.button img {
+    width: 20px;
+    transform: rotate(90deg);
 }
 
 @media only screen and (max-width: 768px) {

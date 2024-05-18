@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import '../styles/RecipeDetails.css';
+import arrow from '../assets/chevron-down-2.png'
+import arrowBold from '../assets/arrow_bold.png'
 
 const RecipeDetails = () => {
     const { id } = useParams();
     const [recipeDetails, setRecipeDetails] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRecipeDetails = async () => {
@@ -38,8 +41,15 @@ const RecipeDetails = () => {
         return ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>);
     };
 
+    const handleBackClick = () => {
+        navigate(-1);
+    }
+
     return (
         <div className="recipe-details-container">
+            <div className='button' onClick={handleBackClick}>
+                <img src={arrow} alt='Back' />
+            </div>
             {recipeDetails ? (
                 <div className="recipe-details">
                     <div className="recipe-details-content">
