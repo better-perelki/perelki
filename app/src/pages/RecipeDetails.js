@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/RecipeDetails.css';
-import arrow from '../assets/chevron-down-2.png'
-import arrowBold from '../assets/arrow_bold.png'
+import arrow from '../assets/chevron-down-2.png';
+import arrowBold from '../assets/arrow_bold.png';
+import useHover from '../helpers/useHover';
 
 const RecipeDetails = () => {
     const { id } = useParams();
     const [recipeDetails, setRecipeDetails] = useState(null);
     const navigate = useNavigate();
+    const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
     useEffect(() => {
         const fetchRecipeDetails = async () => {
@@ -47,8 +49,12 @@ const RecipeDetails = () => {
 
     return (
         <div className="recipe-details-container">
-            <div className='button' onClick={handleBackClick}>
-                <img src={arrow} alt='Back' />
+            <div className='button'
+                onClick={handleBackClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <img src={isHovered ? arrowBold : arrow} alt='Back' />
             </div>
             {recipeDetails ? (
                 <div className="recipe-details">

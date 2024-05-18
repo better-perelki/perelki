@@ -63,10 +63,22 @@ p {
     transform: rotate(90deg);
 }
 
+.button img:hover {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 768px) {
+    .button {
+        top: 100px;
+        left: 30px;
+    }
+
+    .recipe-details-container {
+        padding: 75px 30px 30px 30px;
+    }
+
     .recipe-details {
         flex-direction: column;
-        margin: 100px 40px 40px 40px;
     }
 
     .recipe-details-content {
