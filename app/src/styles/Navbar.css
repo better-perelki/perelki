@@ -65,16 +65,23 @@
     cursor: pointer;
 }
 
-.menuLinks {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 @media screen and (max-width: 1000px) {
     .navbar .left img {
         width: 50px;
         margin-left: 35px;
+    }
+
+    .navbar a {
+        font-size: 16px;
+    }
+
+    .navbar {
+        height: 75px;
+    }
+
+    .navbar .left img {
+        width: 40px;
+        margin-left: 40px;
     }
 }
 
@@ -85,6 +92,8 @@
 
     .navbar .center {
         width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .menuIcon {
@@ -101,13 +110,21 @@
         margin-left: 30px;
     }
 
+    .navbar a {
+        margin: 15px 0;
+        font-size: 16px;
+    }
+
+    .navbar.menuOpen {
+        border: none;
+    }
+
     .menuLinks {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 30px;
-        left: 0;
-        width: 100%;
+        top: 40px;
+        width: 90%;
         margin: 0;
     }
 
@@ -116,10 +133,5 @@
         background-color: var(--background-color);
         width: 100%;
         border-bottom: 1px solid var(--main-color);
-    }
-
-    .navbar a {
-        margin: 15px 0;
-        font-size: 16px;
     }
 }
