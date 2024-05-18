@@ -29,28 +29,27 @@ const RecipeDetails = () => {
         fetchRecipeDetails();
     }, [id]);
 
-    const getIngredientsList = (recipeDetails) => {
-        const ingredients = [];
+    const formatIngredients = (recipeDetails) => {
+        const ingredientsList = [];
         for (let i = 1; i <= 15; i++) {
             const ingredient = recipeDetails[`strIngredient${i}`];
             const measure = recipeDetails[`strMeasure${i}`];
-            if (ingredient && measure) {
-                ingredients.push(`${measure.trim()} ${ingredient.trim()}`);
-            } else if (ingredient) {
-                ingredients.push(ingredient.trim());
+            if (ingredient) {
+                const formattedIngredient = measure ? `${measure.trim()} ${ingredient.trim()}` : ingredient.trim();
+                ingredientsList.push(formattedIngredient);
             }
         }
-        return ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>);
+        return ingredientsList.map((ingredient, index) => <li key={index}>{ingredient}</li>);
     };
 
-    const handleBackClick = () => {
+    const handleBackNavigation = () => {
         navigate(-1);
     }
 
     return (
         <div className="recipe-details-container">
-            <div className='button'
-                onClick={handleBackClick}
+            <div className='back-button'
+                onClick={handleBackNavigation}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
@@ -61,7 +60,7 @@ const RecipeDetails = () => {
                     <div className="recipe-details-content">
                         <h2>{recipeDetails.strDrink}</h2>
                         <h3>Ingredients:</h3>
-                        <ul>{getIngredientsList(recipeDetails)}</ul>
+                        <ul>{formatIngredients(recipeDetails)}</ul>
                         <h3>Instructions:</h3>
                         <p>{recipeDetails.strInstructions}</p>
                     </div>

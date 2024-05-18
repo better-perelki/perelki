@@ -24,11 +24,7 @@ const AllRecipes = () => {
                 }));
             }
         };
-
-        alphabet.letters.forEach((letterObject) => {
-            const letter = letterObject.letter;
-            fetchDrinksByLetter(letter);
-        });
+        alphabet.letters.forEach(({ letter }) => fetchDrinksByLetter(letter));
     }, []);
 
     const handleLetterClick = (letter) => {
@@ -38,54 +34,47 @@ const AllRecipes = () => {
         }
     };
 
+    const renderDrink = (drink) => (
+        <Drink
+            key={drink.idDrink}
+            id={drink.idDrink}
+            image={drink.strDrinkThumb}
+            name={drink.strDrink}
+            ingredients={GetIngredients(drink)}
+        />
+    );
+
     return (
         <div className="AllRecipes">
             <div className='content'>
                 <h2>BOTTOMS UP!!!</h2>
                 <h3>Well, fill your glass first...</h3>
             </div>
-
             <div className="alphabet-bar">
-                {alphabet.letters.map((letterObject) => (
+                {alphabet.letters.map(({ id, letter }) => (
                     <span
-                        key={letterObject.id}
+                        key={id}
                         className="alphabet-link"
-                        onClick={() => handleLetterClick(letterObject.letter)}
+                        onClick={() => handleLetterClick(letter)}
                     >
-                        {letterObject.letter}
+                        {letter}
                     </span>
                 ))}
             </div>
-
-            {alphabet.letters.map((letterObject) => {
-                const letter = letterObject.letter;
-                const drinks = drinksByLetter[letter] || [];
-
-                return (
-                    <div className="show-alphabet" key={letterObject.id} id={letter}>
-                        <div className='drinks'>
-                            <div className='content'>
-                                <div className='letters'>
-                                    <h3>{letter}</h3>
-                                </div>
-                                <div className='drinksList'>
-                                    {drinks.map(drink => (
-                                        <Drink
-                                            key={drink.idDrink}
-                                            id={drink.idDrink}
-                                            image={drink.strDrinkThumb}
-                                            name={drink.strDrink}
-                                            ingredients={GetIngredients(drink)}
-                                        />
-                                    ))}
-                                </div>
+            {alphabet.letters.map(({ id, letter }) => (
+                <div className="show-alphabet" key={id} id={letter}>
+                    <div className='drinks'>
+                        <div className='content'>
+                            <div className='letters'>
+                                <h3>{letter}</h3>
+                            </div>
+                            <div className='drinksList'>
+                                {drinksByLetter[letter]?.map(renderDrink)}
                             </div>
                         </div>
-
-
                     </div>
-                );
-            })}
+                </div>
+            ))}
         </div>
     );
 };

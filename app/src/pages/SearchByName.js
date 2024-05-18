@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/SearchByName.css';
 import Drink from '../components/Drink';
 import GetIngredients from '../helpers/GetIngredients';
 import searchIcon from '../assets/search.png';
-import NameSearcher from '../helpers/NameSearcher';
+import useNameSearcher from '../helpers/NameSearcher';
 
 function SearchByName() {
-    const { searchTerm, setSearchTerm, searchResults, handleInputChange } = NameSearcher();
+    const { searchTerm, setSearchTerm, searchResults, handleInputChange } = useNameSearcher();
+
+    const renderDrinks = () => {
+        return searchResults.map(drink => (
+            <Drink
+                key={drink.idDrink}
+                id={drink.idDrink}
+                image={drink.strDrinkThumb}
+                name={drink.strDrink}
+                ingredients={GetIngredients(drink)}
+            />
+        ));
+    };
 
     return (
         <div className='searchByName'>
@@ -24,15 +36,7 @@ function SearchByName() {
             <div className='drinks'>
                 <div className='content'>
                     <div className='drinksList'>
-                        {searchResults.map(drink => (
-                            <Drink
-                                key={drink.idDrink}
-                                id={drink.idDrink}
-                                image={drink.strDrinkThumb}
-                                name={drink.strDrink}
-                                ingredients={GetIngredients(drink)}
-                            />
-                        ))}
+                        {renderDrinks()}
                     </div>
                 </div>
             </div>

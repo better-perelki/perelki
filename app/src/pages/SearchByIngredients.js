@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/SearchByIngredients.css';
 import Drink from '../components/Drink.js'
-import search from '../assets/search.png';
-import removeHovered from '../assets/remove.png'
-import remove from '../assets/remove1.png'
+import searchIcon from '../assets/search.png';
+import removeHoveredIcon from '../assets/remove.png'
+import removeIcon from '../assets/remove1.png'
 import GetIngredients from '../helpers/GetIngredients.js';
+import useHover from '../helpers/useHover';
 
 function SearchByIngredients() {
-    const [ingredients, setIngredients] = useState([]);
+    const [ingredientsList, setIngredientsList] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [foundCocktails, setFoundCocktails] = useState([]);
+    const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
     useEffect(() => {
         const fetchIngredients = async () => {
@@ -22,7 +24,7 @@ function SearchByIngredients() {
                 }
                 const data = await response.json();
                 const ingredientList = data.drinks.map(drink => drink.strIngredient1.toLowerCase());
-                setIngredients(ingredientList);
+                setIngredientsList(ingredientList);
             } catch (error) {
                 console.error('Error fetching ingredients:', error);
             }
@@ -31,38 +33,20 @@ function SearchByIngredients() {
         fetchIngredients();
     }, []);
 
-    const handleInputChange = (e) => {
-        setSearchTerm(e.target.value.toLowerCase());
-    };
+    const handleSearchTermChange = (e) => setSearchTerm(e.target.value.toLowerCase());
 
-    const handleAddIngredient = (ingredient) => {
+    const handleAddSelectedIngredient = (ingredient) => {
         if (!selectedIngredients.includes(ingredient)) {
             setSelectedIngredients([...selectedIngredients, ingredient]);
         }
         setSearchTerm('');
     };
 
-    const handleRemoveIngredient = (ingredient) => {
-        const newIngredients = selectedIngredients.filter(item => item !== ingredient);
-        setSelectedIngredients(newIngredients);
-    };
+    const handleRemoveSelectedIngredient = (ingredient) => setSelectedIngredients(selectedIngredients.filter(item => item !== ingredient));
 
-    const filteredIngredients = ingredients.filter(ingredient => {
-        const words = ingredient.split(' ');
-        return words.some(word => word.toLowerCase().startsWith(searchTerm));
-    });
+    const filteredIngredients = ingredientsList.filter(ingredient => ingredient.toLowerCase().includes(searchTerm));
 
-    const [isHovered, setIsHovered] = useState(false);
-
-    const handleMouseEnter = () => {
-        setIsHovered(true);
-    }
-
-    const handleMouseLeave = () => {
-        setIsHovered(false);
-    }
-
-    const handleSearch = async () => {
+    const handleSearchCocktails = async () => {
         try {
             const ingredientsQueryFormatted = selectedIngredients.map(ingredient => ingredient.replace(/\s/g, '_')).join(',');
             const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsQueryFormatted}`);
@@ -78,7 +62,7 @@ function SearchByIngredients() {
     };
 
     useEffect(() => {
-        handleSearch();
+        handleSearchCocktails();
     }, [selectedIngredients]);
 
     return (
@@ -87,12 +71,12 @@ function SearchByIngredients() {
                 <div className="ingredients-section">
                     <h2>Choose ingredients:</h2>
                     <div className="searchInput">
-                        <img src={search} alt='Search Icon' />
+                        <img src={searchIcon} alt='Search Icon' />
                         <input
                             type="text"
                             placeholder="Search ingredients..."
                             value={searchTerm}
-                            onChange={handleInputChange}
+                            onChange={handleSearchTermChange}
                         />
                     </div>
                     {searchTerm && (
@@ -101,7 +85,7 @@ function SearchByIngredients() {
                                 <div
                                     key={index}
                                     className="searchResult"
-                                    onClick={() => handleAddIngredient(ingredient)}
+                                    onClick={() => handleAddSelectedIngredient(ingredient)}
                                 >
                                     {ingredient}
                                 </div>
@@ -109,7 +93,6 @@ function SearchByIngredients() {
                         </div>
                     )}
                 </div>
-
                 {selectedIngredients.length > 0 && (
                     <div>
                         <div className="selected-ingredients-section">
@@ -118,10 +101,10 @@ function SearchByIngredients() {
                                 {selectedIngredients.map((ingredient, index) => (
                                     <div key={index} className="selected-ingredient">
                                         {ingredient}
-                                        <button onClick={() => handleRemoveIngredient(ingredient)}
+                                        <button onClick={() => handleRemoveSelectedIngredient(ingredient)}
                                             onMouseEnter={handleMouseEnter}
                                             onMouseLeave={handleMouseLeave}>
-                                            <img src={isHovered ? removeHovered : remove} />
+                                            <img src={isHovered ? removeHoveredIcon : removeIcon} />
                                         </button>
                                     </div>
                                 ))}
