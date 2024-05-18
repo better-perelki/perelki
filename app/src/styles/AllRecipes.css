@@ -12,10 +12,10 @@
 }
 
 .AllRecipes .content {
-    margin: 0 50px 50px 50px;
+    margin: 0 50px;
 }
 
-.AllRecipes .content h1 {
+.AllRecipes .content h3 {
     color: var(--accent-color);
     text-transform: lowercase;
     font-weight: 700;
@@ -26,7 +26,7 @@
 }
 
 .AllRecipes .content h2 {
-    color: var(--main-color);
+    /* color: var(--main-color); */
     text-transform: uppercase;
     font-weight: 700;
     font-size: 70px;
@@ -44,6 +44,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap;
     /* Dodatkowy margines na dole paska */
 }
 
@@ -56,11 +57,10 @@
     font-weight: bold;
     color: #fff;
     /* Kolor tekstu */
-    background-color: #262624;
+    background-color: transparent;
     /* Kolor tła */
     border-radius: 5px;
     text-decoration: none;
-    cursor: pointer;
     transition: background-color 0.3s ease;
     /* Animacja zmiany koloru tła */
 }
@@ -68,11 +68,10 @@
 /* Styl dla odnośników po najechaniu kursorem */
 .alphabet-link:hover {
     background-color: #F2E41D;
-    ;
-    /* Kolor tła po najechaniu */
+    cursor: pointer;
 }
 
-.drinks {
+/* .drinks {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -95,4 +94,25 @@
     font-size: 70px;
     color: #F2E41D;
     text-align: center;
+} */
+
+@media only screen and (max-width: 600px) {
+    .AllRecipes .content h2 {
+        font-size: 24px;
+        margin-top: 75px;
+    }
+
+    .AllRecipes .content h3 {
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+
+    .AllRecipes .content {
+        margin-bottom: 0;
+    }
+
+    .alphabet-link {
+        font-size: 16px;
+        padding: 8px 4px;
+    }
 }

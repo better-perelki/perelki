@@ -97,3 +97,14 @@
 .drinks .content {
     margin-top: 0;
 }
+
+@media only screen and (max-width: 600px) {
+    .search-by-ingredients-container .content {
+        margin-top: 75px;
+    }
+
+    .drinks h2 {
+        margin-top: 50px;
+        margin-bottom: 0;
+    }
+}

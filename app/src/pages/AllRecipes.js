@@ -42,7 +42,7 @@ const AllRecipes = () => {
         <div className="AllRecipes">
             <div className='content'>
                 <h2>BOTTOMS UP!!!</h2>
-                <h1>Well, fill your glass first...</h1>
+                <h3>Well, fill your glass first...</h3>
             </div>
 
             <div className="alphabet-bar">
