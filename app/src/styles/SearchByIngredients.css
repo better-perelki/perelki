@@ -105,4 +105,16 @@
         margin-top: 50px;
         margin-bottom: 0;
     }
+
+    .searchResult,
+    .selected-ingredient {
+        font-size: 8px;
+        padding: 8px;
+        margin: 5px;
+    }
+
+    .selected-ingredient button {
+        margin-left: 5px;
+        width: 8px;
+    }
 }
