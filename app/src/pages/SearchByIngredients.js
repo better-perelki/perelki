@@ -5,6 +5,7 @@ import Drink from '../components/Drink.js'
 import search from '../assets/search.png';
 import removeHovered from '../assets/remove.png'
 import remove from '../assets/remove1.png'
+import GetIngredients from '../helpers/GetIngredients.js';
 
 function SearchByIngredients() {
     const [ingredients, setIngredients] = useState([]);
@@ -64,7 +65,6 @@ function SearchByIngredients() {
     const handleSearch = async () => {
         try {
             const ingredientsQueryFormatted = selectedIngredients.map(ingredient => ingredient.replace(/\s/g, '_')).join(',');
-            console.log(ingredientsQueryFormatted);
             const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsQueryFormatted}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch cocktails');
@@ -139,7 +139,7 @@ function SearchByIngredients() {
                                                     id={drink.idDrink}
                                                     image={drink.strDrinkThumb}
                                                     name={drink.strDrink}
-                                                // ingredients={GetIngredients(drink)}
+                                                    ingredients={GetIngredients(drink)}
                                                 />
                                             ))}
                                         </div>
