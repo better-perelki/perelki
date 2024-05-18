@@ -1,63 +1,92 @@
 .recipe-details-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 150px; /* Margines na górze, aby uniknąć zasłaniania przez pasek nawigacyjny */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 130px 50px 50px 50px;
+    position: relative;
 }
 
 .recipe-details {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    width: 100%;
     display: flex;
+    margin-top: 50px;
+}
+
+.recipe-details-content {
+    width: 45%;
+    flex: 1;
+    margin-right: 50px;
+}
+
+.recipe-details-content h2 {
+    font-size: 40px;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.recipe-details-content h3 {
+    font-size: 24px;
+    color: var(--main-color);
+}
+
+.recipe-details-content ul,
+p {
+    font-size: 16px;
+    color: var(--container-color);
+    list-style: none;
+}
+
+.recipe-details-content li {
+    margin: 5px 0;
 }
 
 .recipe-image-container {
-    flex: 0 0 40%; /* 40% szerokości dla zdjęcia */
-    text-align: center;
-    margin-right: 20px;
+    width: 45%;
 }
 
 .recipe-image-container img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
 }
 
-.recipe-details-content {
-    flex: 1;
+.button {
+    position: absolute;
+    top: 140px;
+    left: 50px;
 }
 
-.recipe-details h2 {/* drink name */
-    color: #F2E41D;
-    font-size: 24px;
-    margin: 10px;
-    margin-bottom: 0px; 
+.button img {
+    width: 20px;
+    transform: rotate(90deg);
 }
 
-.recipe-details h3 { /*Ingredients and Instructions */
-    color: #F2E41D;
-    font-size: 20px;
-    margin-bottom: 10px;
+.button img:hover {
+    cursor: pointer;
 }
 
-.recipe-details ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
+@media only screen and (max-width: 768px) {
+    .button {
+        top: 100px;
+        left: 30px;
+    }
 
-.recipe-details ul li {
-    margin-bottom: 5px;
-    color: #262624;
-    font-size: 16px;
-    line-height: 1.5;
-}
+    .recipe-details-container {
+        padding: 75px 30px 30px 30px;
+    }
 
-.recipe-details p {
-    margin-bottom: 5px;
-    color: #262624;
-    font-size: 16px;
-    line-height: 1.5;
+    .recipe-details {
+        flex-direction: column;
+    }
+
+    .recipe-details-content {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .recipe-image-container {
+        width: 100%;
+    }
 }

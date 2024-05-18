@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import '../styles/RecipeDetails.css'; // Importowanie styli CSS
+import { useParams, useNavigate } from 'react-router-dom';
+import '../styles/RecipeDetails.css';
+import arrow from '../assets/chevron-down-2.png';
+import arrowBold from '../assets/arrow_bold.png';
+import useHover from '../helpers/useHover';
 
 const RecipeDetails = () => {
     const { id } = useParams();
     const [recipeDetails, setRecipeDetails] = useState(null);
+    const navigate = useNavigate();
+    const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
     useEffect(() => {
         const fetchRecipeDetails = async () => {
@@ -26,7 +31,6 @@ const RecipeDetails = () => {
 
     const getIngredientsList = (recipeDetails) => {
         const ingredients = [];
-        // Loop through up to 15 ingredients
         for (let i = 1; i <= 15; i++) {
             const ingredient = recipeDetails[`strIngredient${i}`];
             const measure = recipeDetails[`strMeasure${i}`];
@@ -39,19 +43,30 @@ const RecipeDetails = () => {
         return ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>);
     };
 
+    const handleBackClick = () => {
+        navigate(-1);
+    }
+
     return (
         <div className="recipe-details-container">
+            <div className='button'
+                onClick={handleBackClick}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                <img src={isHovered ? arrowBold : arrow} alt='Back' />
+            </div>
             {recipeDetails ? (
                 <div className="recipe-details">
-                    <div className="recipe-image-container">
-                        <img src={recipeDetails.strDrinkThumb} alt={recipeDetails.strDrink} />
-                        <h2>{recipeDetails.strDrink}</h2> {/* Nazwa drinka pod zdjęciem */}
-                    </div>
                     <div className="recipe-details-content">
+                        <h2>{recipeDetails.strDrink}</h2>
                         <h3>Ingredients:</h3>
                         <ul>{getIngredientsList(recipeDetails)}</ul>
                         <h3>Instructions:</h3>
                         <p>{recipeDetails.strInstructions}</p>
+                    </div>
+                    <div className="recipe-image-container">
+                        <img src={recipeDetails.strDrinkThumb} alt={recipeDetails.strDrink} />
                     </div>
                 </div>
             ) : (
