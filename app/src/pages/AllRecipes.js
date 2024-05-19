@@ -3,19 +3,24 @@ import '../styles/AllRecipes.css';
 import alphabet from '../data/Alphabet.json';
 import Drink from '../components/Drink';
 import GetIngredients from '../helpers/GetIngredients';
+import CustomAlert from '../components/CustomAlert';
+import IconRandom from '../components/IconRandom';
 
 const AllRecipes = () => {
     const [drinksByLetter, setDrinksByLetter] = useState({});
     const [showNonAlcoholic, setShowNonAlcoholic] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
+    const [showRandomIcon, setShowRandomIcon] = useState(false);
 
     const fetchDrinksByLetter = async (letter) => {
         try {
             let apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
-            
+
             if (showNonAlcoholic) {
                 apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`;
             }
-            
+
             const response = await fetch(apiUrl);
             const data = await response.json();
 
@@ -46,11 +51,32 @@ const AllRecipes = () => {
         });
     }, [showNonAlcoholic]);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowRandomIcon(true);
+        }, 10000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+
     const handleLetterClick = (letter) => {
         const element = document.getElementById(letter);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+
+            setShowAlert(true);
+            setAlertMessage('No drinks found for this letter.');
+            setTimeout(() => {
+                setShowAlert(false);
+                setAlertMessage('');
+            }, 2000);
         }
+    };
+
+    const handleCloseAlert = () => {
+        setShowAlert(false);
     };
 
     const toggleNonAlcoholic = () => {
@@ -72,6 +98,7 @@ const AllRecipes = () => {
                         onClick={() => handleLetterClick(letterObject.letter)}
                     >
                         {letterObject.letter}
+
                     </span>
                 ))}
             </div>
@@ -92,6 +119,7 @@ const AllRecipes = () => {
                     const drinkName = drink.strDrink.toLowerCase();
                     return !showNonAlcoholic || drinkName.startsWith(letter.toLowerCase());
                 });
+
 
                 if (filteredDrinks.length > 0) {
                     return (
@@ -120,6 +148,8 @@ const AllRecipes = () => {
                     return null;
                 }
             })}
+            {showAlert && <CustomAlert message={alertMessage} onClose={handleCloseAlert} />}
+            {showRandomIcon && <IconRandom />}
         </div>
     );
 };
