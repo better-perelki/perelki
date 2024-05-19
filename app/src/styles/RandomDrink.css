@@ -1,0 +1,25 @@
+.RandomDrink {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.RandomDrink h2 {
+    font-size: 24px;
+    text-transform: lowercase;
+    margin-bottom: 25px;
+}
+
+.RandomDrink h1 {
+    font-size: 32px;
+    margin-bottom: -20px;
+}
+
+.RandomDrinkGif {
+    max-width: 100%; 
+    max-height: 500px; 
+    object-fit: contain; 
+}
