@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 130px 50px 50px;
+    padding: 130px 50px 50px 50px;
     position: relative;
 }
 
@@ -18,22 +18,26 @@
     width: 45%;
     flex: 1;
     margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .recipe-details-content h2 {
-    font-size: 40px;
+    font-size: 72px;
     color: var(--accent-color);
     margin: 0;
 }
 
 .recipe-details-content h3 {
-    font-size: 24px;
+    font-size: 32px;
     color: var(--main-color);
+    text-transform: uppercase;
 }
 
 .recipe-details-content ul,
-.recipe-details-content p {
-    font-size: 16px;
+p {
+    font-size: 20px;
     color: var(--container-color);
     list-style: none;
 }
@@ -44,12 +48,14 @@
 
 .recipe-image-container {
     width: 45%;
+    display: flex;
 }
 
 .recipe-image-container img {
     width: 100%;
     height: auto;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .button {
@@ -67,14 +73,55 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1140px) {
+    .recipe-details-content h2 {
+        font-size: 64px;
+    }
+
+    .recipe-details-content h3 {
+        font-size: 24px;
+    }
+
+    .recipe-details-content ul,
+    p {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
     .button {
-        top: 70px;
-        left: 27px;
+        top: 100px;
+        left: 40px;
     }
 
     .recipe-details-container {
-        padding: 40px 30px;
+        padding: 75px 40px 40px 40px;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    .recipe-details-content h2 {
+        font-size: 48px;
+    }
+
+    .recipe-details-content h3 {
+        font-size: 24px;
+    }
+
+    .recipe-details-content ul,
+    p {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .button {
+        top: 75px;
+        left: 30px;
+    }
+
+    .recipe-details-container {
+        padding: 50px 30px 30px 30px;
     }
 
     .recipe-details {
@@ -88,18 +135,5 @@
 
     .recipe-image-container {
         width: 100%;
-    }
-
-    .recipe-details-content h2 {
-        font-size: 32px;
-    }
-
-    .recipe-details-content h3 {
-        font-size: 16px;
-    }
-
-    .recipe-details-content ul,
-    .recipe-details-content p {
-        font-size: 12px;
     }
 }

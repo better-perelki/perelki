@@ -48,7 +48,7 @@ const RecipeDetails = () => {
 
     return (
         <div className="recipe-details-container">
-            <div className='back-button'
+            <div className='button'
                 onClick={handleBackNavigation}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -59,10 +59,14 @@ const RecipeDetails = () => {
                 <div className="recipe-details">
                     <div className="recipe-details-content">
                         <h2>{recipeDetails.strDrink}</h2>
-                        <h3>Ingredients:</h3>
-                        <ul>{formatIngredients(recipeDetails)}</ul>
-                        <h3>Instructions:</h3>
-                        <p>{recipeDetails.strInstructions}</p>
+                        <div className='ingredients'>
+                            <h3>Ingredients:</h3>
+                            <ul>{formatIngredients(recipeDetails)}</ul>
+                        </div>
+                        <div className='instructions'>
+                            <h3>Instructions:</h3>
+                            <p>{recipeDetails.strInstructions}</p>
+                        </div>
                     </div>
                     <div className="recipe-image-container">
                         <img src={recipeDetails.strDrinkThumb} alt={recipeDetails.strDrink} />
