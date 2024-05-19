@@ -1,12 +1,15 @@
-import React from 'react';
+import React,  { useState, useEffect } from 'react';
 import '../styles/SearchByName.css';
 import Drink from '../components/Drink';
 import GetIngredients from '../helpers/GetIngredients';
 import searchIcon from '../assets/search.png';
 import useNameSearcher from '../helpers/NameSearcher';
+import IconRandom from '../components/IconRandom';
+
 
 function SearchByName() {
     const { searchTerm, setSearchTerm, searchResults, handleInputChange } = useNameSearcher();
+    const [showRandomIcon, setShowRandomIcon] = useState(false);
 
     const renderDrinks = () => {
         return searchResults.map(drink => (
@@ -19,6 +22,14 @@ function SearchByName() {
             />
         ));
     };
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowRandomIcon(true);
+        }, 10000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     return (
         <div className='searchByName'>
@@ -40,6 +51,7 @@ function SearchByName() {
                     </div>
                 </div>
             </div>
+            {showRandomIcon && <IconRandom />}
         </div>
     );
 }
