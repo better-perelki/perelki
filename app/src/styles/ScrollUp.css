@@ -27,6 +27,18 @@
   cursor: pointer;
 }
 
+.top-to-btm.hidden {
+  display: none;
+}
+
+.top-to-btm.visible {
+  display: block;
+}
+
+.top-to-btm {
+  position: relative;
+}
+
 @keyframes movebtn {
 
   0%,
