@@ -41,3 +41,82 @@
 img {
     display: block;
 }
+
+.random {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+}
+
+.OurPicks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+}
+
+
+.OurPicks {
+    background-color: var(--background-color);
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+}
+
+
+.OurPicks .drinksList {
+    width: 100%;
+    display: grid;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.OurPicks .drink a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.OurPicks .drink img {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 25px;
+}
+
+.OurPicks .info {
+    flex: 1;
+}
+
+.OurPicks .drink h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+
+
+.OurPicks .pick {
+    text-align: center;
+}
+
+.OurPicks .pick h4 {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--main-color);
+    margin-bottom: 15px;
+}
+
+.arrow2 {
+
+    width: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    transform: rotate(180deg);
+
+}
