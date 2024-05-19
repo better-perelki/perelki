@@ -7,12 +7,14 @@ import removeHoveredIcon from '../assets/remove.png';
 import removeIcon from '../assets/remove1.png';
 import useHover from '../helpers/useHover';
 import GetIngredients from '../helpers/GetIngredients.js';
+import IconRandom from '../components/IconRandom';
 
 function SearchByIngredients() {
     const [ingredientsList, setIngredientsList] = useState([]);
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [foundCocktails, setFoundCocktails] = useState([]);
+     const [showRandomIcon, setShowRandomIcon] = useState(false);
     const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
     useEffect(() => {
@@ -31,6 +33,14 @@ function SearchByIngredients() {
         };
 
         fetchIngredients();
+    }, []);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowRandomIcon(true);
+        }, 10000);
+
+        return () => clearTimeout(timer);
     }, []);
 
     const handleSearchTermChange = (e) => setSearchTerm(e.target.value.toLowerCase());
@@ -150,6 +160,7 @@ function SearchByIngredients() {
                     </div>
                 )}
             </div>
+            {showRandomIcon && <IconRandom />}
         </div>
     );
 }
