@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RandomDrinkGif from '../assets/RandomDrink.gif';
+import RandomDrinkGif from '../assets/ezgif.com-crop.gif';
 import '../styles/RandomDrink.css';
 
 const RandomDrink = () => {
@@ -27,7 +27,7 @@ const RandomDrink = () => {
 
     return (
         <div className='RandomDrink' onClick={handleRandomDrinkClick} style={{ cursor: 'pointer' }}>
-            <h1>Try our random recipe!</h1>
+            <h2>click down below to get unique recipe!</h2>
             <img src={RandomDrinkGif} className='RandomDrinkGif' alt='RandomDrink' />
         </div>
     );
