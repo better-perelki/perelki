@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import '../styles/SearchByIngredients.css';
 import Drink from '../components/Drink.js'
 import searchIcon from '../assets/search.png';
-import removeHoveredIcon from '../assets/remove.png'
-import removeIcon from '../assets/remove1.png'
+import removeHoveredIcon from '../assets/remove.png';
+import removeIcon from '../assets/remove1.png';
 import GetIngredients from '../helpers/GetIngredients.js';
 import useHover from '../helpers/useHover';
 
