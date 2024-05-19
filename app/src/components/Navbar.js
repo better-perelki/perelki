@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import BeerIcon from '../assets/beer.png';
 import hamburger from '../assets/hamburger.png';
+import close from '../assets/x_yellow.png'
 import { Link, useLocation } from 'react-router-dom';
 import '../styles/Navbar.css';
 
@@ -10,6 +11,8 @@ function Navbar() {
     const toggleMenu = () => {
         setMenuOpen(!isMenuOpen);
     };
+
+    const icon = isMenuOpen ? close : hamburger;
 
     const IsActiveLink = (path) => {
         return useLocation().pathname === path ? 'active' : '';
@@ -32,7 +35,7 @@ function Navbar() {
                 </div>
                 <div className='right'>
                     <div className={`menuIcon ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
-                        <img src={hamburger} alt="Menu" />
+                        <img src={icon} alt="Menu" />
                     </div>
                 </div>
             </div>
