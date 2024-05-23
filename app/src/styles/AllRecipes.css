@@ -15,7 +15,7 @@
     text-transform: lowercase;
     font-weight: 700;
     font-size: 28px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     text-align: center;
 }
 
@@ -99,6 +99,7 @@
 
 .AllRecipes .filter-button:hover {
     background-color: var(--accent-color);
+    color: var(--container-color);
 }
 
 .AllRecipes.non-alcoholic-mode .filter-button:hover {
@@ -153,5 +154,9 @@
     .alphabet-link {
         font-size: 16px;
         padding: 8px 4px;
+    }
+
+    .AllRecipes .filter-button {
+        margin-bottom: 25px;
     }
 }
