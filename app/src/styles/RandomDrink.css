@@ -11,6 +11,7 @@
     font-size: 24px;
     text-transform: lowercase;
     margin-bottom: 25px;
+    color: var(--accent-color);
 }
 
 .RandomDrink h1 {
@@ -19,7 +20,7 @@
 }
 
 .RandomDrinkGif {
-    max-width: 100%; 
-    max-height: 500px; 
-    object-fit: contain; 
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
 }

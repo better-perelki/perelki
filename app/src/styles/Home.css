@@ -8,13 +8,22 @@
     margin: auto;
 }
 
+.OurPicks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+}
+
 .popular {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 25px 0;
+    margin: 25px 0 0 0;
 }
 
 .popular .content {
@@ -52,24 +61,6 @@ img {
 
 }
 
-.OurPicks {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-
-}
-
-
-.OurPicks {
-    background-color: var(--background-color);
-    font-family: 'Poppins', sans-serif;
-    padding: 20px;
-}
-
-
 .OurPicks .drinksList {
     width: 100%;
     display: grid;
@@ -106,17 +97,39 @@ img {
 }
 
 .OurPicks .pick h4 {
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.OurPicks .pick h5 {
     color: var(--main-color);
-    margin-bottom: 15px;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.random .RandDrink h2 {
+    color: var(--accent-color);
+}
+
+.random {
+    margin-bottom: 50px;
 }
 
 .arrow2 {
-
     width: 30px;
     margin-top: 40px;
     margin-bottom: 40px;
     transform: rotate(180deg);
+}
 
+@media screen and (max-width: 600px) {
+    .OurPicks .pick h5 {
+        margin-bottom: 25px;
+        font-size: 16px;
+    }
+
+    .random .RandDrink h2 {
+        font-size: 16px;
+    }
 }

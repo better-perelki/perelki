@@ -78,8 +78,8 @@ function SearchByIngredients() {
 
     return (
         <div className="search-by-ingredients-container">
-            <div className='content'>
-                <div className="ingredients-section">
+            <div className="ingredients-section">
+                <div className='search'>
                     <h2>Choose ingredients:</h2>
                     <div className="searchInput">
                         <img src={searchIcon} alt='Search Icon' />
@@ -90,59 +90,59 @@ function SearchByIngredients() {
                             onChange={handleSearchTermChange}
                         />
                     </div>
-                    {searchTerm && (
-                        <div className="searchResults">
-                            {filteredIngredients.map((ingredient, index) => (
-                                <div
-                                    key={index}
-                                    className="searchResult"
-                                    onClick={() => handleAddSelectedIngredient(ingredient)}
-                                >
-                                    {ingredient}
-                                </div>
-                            ))}
-                        </div>
-                    )}
                 </div>
-                {selectedIngredients.length > 0 && (
-                    <div>
-                        <div className="selected-ingredients-section">
-                            <h2>Selected ingredients:</h2>
-                            <div className="selected-ingredient-list">
-                                {selectedIngredients.map((ingredient, index) => (
-                                    <div key={index} className="selected-ingredient">
-                                        {ingredient}
-                                        <button onClick={() => handleRemoveSelectedIngredient(ingredient)}
-                                            onMouseEnter={handleMouseEnter}
-                                            onMouseLeave={handleMouseLeave}>
-                                            <img src={isHovered ? removeHoveredIcon : removeIcon} />
-                                        </button>
-                                    </div>
-                                ))}
+                {searchTerm && (
+                    <div className="searchResults">
+                        {filteredIngredients.map((ingredient, index) => (
+                            <div
+                                key={index}
+                                className="searchResult"
+                                onClick={() => handleAddSelectedIngredient(ingredient)}
+                            >
+                                {ingredient}
                             </div>
-                        </div>
-                        <div className="drinks">
-                            <div className='content'>
-                                {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
-                                    <div className='content'>
-                                        <h2>Found drinks:</h2>
-                                        <div className='drinksList'>
-                                            {foundCocktails.map(drink => (
-                                                <Drink
-                                                    key={drink.idDrink}
-                                                    id={drink.idDrink}
-                                                    image={drink.strDrinkThumb}
-                                                    name={drink.strDrink}
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 )}
             </div>
+            {selectedIngredients.length > 0 && (
+                <div>
+                    <div className="selected-ingredients-section">
+                        <h2>Selected ingredients:</h2>
+                        <div className="selected-ingredient-list">
+                            {selectedIngredients.map((ingredient, index) => (
+                                <div key={index} className="selected-ingredient">
+                                    {ingredient}
+                                    <button onClick={() => handleRemoveSelectedIngredient(ingredient)}
+                                        onMouseEnter={handleMouseEnter}
+                                        onMouseLeave={handleMouseLeave}>
+                                        <img src={isHovered ? removeHoveredIcon : removeIcon} />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className="drinks">
+                        <div className='content'>
+                            {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
+                                <div className='content'>
+                                    <h2>Found drinks:</h2>
+                                    <div className='drinksList'>
+                                        {foundCocktails.map(drink => (
+                                            <Drink
+                                                key={drink.idDrink}
+                                                id={drink.idDrink}
+                                                image={drink.strDrinkThumb}
+                                                name={drink.strDrink}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
             {showRandomIcon && <IconRandom />}
         </div>
     );

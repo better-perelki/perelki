@@ -5,11 +5,11 @@ import '../styles/RandomDrink.css';
 
 const RandomDrink = () => {
     const [randomDrink, setRandomDrink] = useState(null);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const handleRandomDrinkClick = async () => {
         try {
-    
+
             const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
             const data = await response.json();
 
@@ -17,7 +17,7 @@ const RandomDrink = () => {
                 const { idDrink } = data.drinks[0];
                 setRandomDrink(idDrink);
 
-          
+
                 navigate(`/recipe/${idDrink}`);
             }
         } catch (error) {
@@ -27,7 +27,7 @@ const RandomDrink = () => {
 
     return (
         <div className='RandomDrink' onClick={handleRandomDrinkClick} style={{ cursor: 'pointer' }}>
-            <h2>click down below to get unique recipe!</h2>
+            <h2>click down below to get a unique recipe!</h2>
             <img src={RandomDrinkGif} className='RandomDrinkGif' alt='RandomDrink' />
         </div>
     );

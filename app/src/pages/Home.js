@@ -12,9 +12,8 @@ function Home() {
         <div className='home'>
             <Header />
             <PopularSection />
-
+            <OurPicks />
             <RandomDrink />
-            <OurPicks/>
         </div>
     );
 }
@@ -39,14 +38,10 @@ function PopularSection() {
     );
 }
 
-
 function RandomDrink() {
     return (
-        
         <div className='random'>
-            <img src={arrow} className='arrow2' alt='Arrow' />
             <h2>Can't decide?</h2>
-
             <div className='RandDrink'>
                 <Random />
             </div>
@@ -57,9 +52,9 @@ function RandomDrink() {
 
 const OurPicks = () => {
     const picks = [
-        { name: "Oliwia", drinkName: "aperol spritz", explain : ' "I love Aperol Spritz for its refreshing, bittersweet flavor." ' },
-        { name: "Kacper", drinkName: "tom collins", explain : ' "I enjoy Tom Collins for its zesty, citrusy refreshment." ' }, 
-        { name: "Pola", drinkName: "mojito", explain :' "I like mojitos for their refreshing blend of mint and lime." ' }
+        { name: "Oliwia", drinkName: "aperol spritz", explain: ' "I love Aperol Spritz for its refreshing, bittersweet flavor." ' },
+        { name: "Kacper", drinkName: "tom collins", explain: ' "I enjoy Tom Collins for its zesty, citrusy refreshment." ' },
+        { name: "Pola", drinkName: "mojito", explain: ' "I like mojitos for their refreshing blend of mint and lime." ' }
     ];
 
     const [drinks, setDrinks] = useState([]);
@@ -82,22 +77,23 @@ const OurPicks = () => {
 
     return (
         <div className='OurPicks'>
-            <img src={arrow} className='arrow2' alt='Arrow' />
             <h2>OUR FAVOURITES</h2>
-            <div className='drinksList'>
-                {drinks.map((item, index) => (
-                    <div key={index} className="pick">
-                        <h4>{item.name}'s Pick</h4>
-                        <Drink
-                            key={item.drinkData.idDrink}
-                            id={item.drinkData.idDrink}
-                            image={item.drinkData.strDrinkThumb}
-                            name={item.drinkData.strDrink}
-                            ingredients={item.drinkData.strIngredient1} 
-                        />
-                        <h4>{item.explain}</h4>
-                    </div>
-                ))}
+            <div className='content'>
+                <div className='drinksList'>
+                    {drinks.map((item, index) => (
+                        <div key={index} className="pick">
+                            <h4>{item.name}'s Pick</h4>
+                            <Drink
+                                key={item.drinkData.idDrink}
+                                id={item.drinkData.idDrink}
+                                image={item.drinkData.strDrinkThumb}
+                                name={item.drinkData.strDrink}
+                                ingredients={item.drinkData.strIngredient1}
+                            />
+                            <h5>{item.explain}</h5>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );
