@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/AllRecipes.css';
 import alphabet from '../data/Alphabet.json';
 import nonAlcoholicDrinksData from '../data/NonAlcoholicDrinks.json';
@@ -10,7 +11,10 @@ import IconRandom from '../components/IconRandom';
 const AllRecipes = () => {
     const [drinksByLetter, setDrinksByLetter] = useState({});
     const [nonAlcoholicDrinks, setNonAlcoholicDrinks] = useState([]);
-    const [showNonAlcoholic, setShowNonAlcoholic] = useState(false);
+    const [showNonAlcoholic, setShowNonAlcoholic] = useState(() => {
+        const savedState = localStorage.getItem('showNonAlcoholic');
+        return savedState ? JSON.parse(savedState) : false;
+    });
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [showRandomIcon, setShowRandomIcon] = useState(false);
@@ -55,7 +59,6 @@ const AllRecipes = () => {
     };
 
     useEffect(() => {
-
         alphabet.letters.forEach((letterObject) => {
             const letter = letterObject.letter;
             fetchDrinksByLetter(letter);
@@ -65,13 +68,16 @@ const AllRecipes = () => {
     }, []);
 
     useEffect(() => {
-
         const timer = setTimeout(() => {
             setShowRandomIcon(true);
         }, 10000);
 
         return () => clearTimeout(timer);
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem('showNonAlcoholic', JSON.stringify(showNonAlcoholic));
+    }, [showNonAlcoholic]);
 
     const handleLetterClick = (letter) => {
         const element = document.getElementById(letter);
@@ -92,7 +98,7 @@ const AllRecipes = () => {
     };
 
     const toggleNonAlcoholic = () => {
-        setShowNonAlcoholic(!showNonAlcoholic);
+        setShowNonAlcoholic((prevState) => !prevState);
     };
 
     return (
