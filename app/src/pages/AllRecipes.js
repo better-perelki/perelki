@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/AllRecipes.css';
 import alphabet from '../data/Alphabet.json';
+import nonAlcoholicDrinksData from '../data/NonAlcoholicDrinks.json';
 import Drink from '../components/Drink';
 import GetIngredients from '../helpers/GetIngredients';
 import CustomAlert from '../components/CustomAlert';
@@ -45,9 +46,7 @@ const AllRecipes = () => {
 
     const fetchNonAlcoholicDrinks = async () => {
         try {
-            const apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`;
-            const response = await fetch(apiUrl);
-            const data = await response.json();
+            const data = nonAlcoholicDrinksData;
             setNonAlcoholicDrinks(data.drinks || []);
         } catch (error) {
             console.error('Error fetching non-alcoholic drinks:', error);
