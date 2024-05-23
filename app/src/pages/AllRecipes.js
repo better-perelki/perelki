@@ -98,8 +98,10 @@ const AllRecipes = () => {
     return (
         <div className={`AllRecipes ${showNonAlcoholic ? 'non-alcoholic-mode' : ''}`}>
             <div className='content'>
-                <h2>BOTTOMS UP!!!</h2>
-                <h3>{showNonAlcoholic ? "Well, at least you're avoiding hangover..." : "Well, fill your glass first..."}</h3>
+                <div className='text-container'>
+                    <h2>BOTTOMS UP!!!</h2>
+                    <h3>{showNonAlcoholic ? "Well, at least you're avoiding hangover..." : "Well, fill your glass first..."}</h3>
+                </div>
             </div>
 
             <div className="alphabet-bar">
