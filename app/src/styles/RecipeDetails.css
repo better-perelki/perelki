@@ -73,6 +73,13 @@ p {
     cursor: pointer;
 }
 
+.LoadIcon
+{
+    position: center;
+    top: 50%;
+    left: 50%;
+}
+
 @media only screen and (max-width: 1140px) {
     .recipe-details-content h2 {
         font-size: 64px;
