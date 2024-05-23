@@ -124,12 +124,18 @@ img {
 }
 
 @media screen and (max-width: 600px) {
+    .random .RandDrink h2 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
     .OurPicks .pick h5 {
         margin-bottom: 25px;
-        font-size: 16px;
+        font-size: 20px;
     }
 
     .random .RandDrink h2 {
-        font-size: 16px;
+        font-size: 20px;
     }
 }

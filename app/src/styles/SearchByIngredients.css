@@ -96,6 +96,20 @@
     margin-top: 0;
 }
 
+.no-ingredients-message,
+.no-drinks-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-ingredients-message p,
+.no-drinks-message p {
+    color: var(--accent-color);
+    text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
     .search-by-ingredients-container .content {
         margin-top: 75px;
@@ -116,5 +130,15 @@
     .selected-ingredient button {
         margin-left: 5px;
         width: 8px;
+    }
+
+    .no-ingredients-message,
+    .no-drinks-message {
+        margin-top: 25px;
+    }
+
+    .no-ingredients-message p,
+    .no-drinks-message p {
+        font-size: 16px;
     }
 }

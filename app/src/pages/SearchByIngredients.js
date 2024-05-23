@@ -70,11 +70,9 @@ function SearchByIngredients() {
         }
     };
 
-
     useEffect(() => {
         handleSearchCocktails();
     }, [selectedIngredients]);
-
 
     return (
         <div className="search-by-ingredients-container">
@@ -105,6 +103,13 @@ function SearchByIngredients() {
                     </div>
                 )}
             </div>
+            {selectedIngredients.length === 0 && (
+                <div className='content'>
+                    <div className="no-ingredients-message">
+                        <p>Add some ingredients, you can't make a drink out of nothing!</p>
+                    </div>
+                </div>
+            )}
             {selectedIngredients.length > 0 && (
                 <div>
                     <div className="selected-ingredients-section">
@@ -124,7 +129,7 @@ function SearchByIngredients() {
                     </div>
                     <div className="drinks">
                         <div className='content'>
-                            {Array.isArray(foundCocktails) && foundCocktails.length > 0 && (
+                            {Array.isArray(foundCocktails) && foundCocktails.length > 0 ? (
                                 <div className='content'>
                                     <h2>Found drinks:</h2>
                                     <div className='drinksList'>
@@ -137,6 +142,11 @@ function SearchByIngredients() {
                                             />
                                         ))}
                                     </div>
+                                </div>
+                            ) : (
+                                <div className="no-drinks-message">
+                                    <p>No matching drinks found :(</p>
+                                    <p>Try different ingredients</p>
                                 </div>
                             )}
                         </div>
