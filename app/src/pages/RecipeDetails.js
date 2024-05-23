@@ -4,6 +4,7 @@ import '../styles/RecipeDetails.css';
 import arrow from '../assets/chevron-down-2.png';
 import arrowBold from '../assets/arrow_bold.png';
 import useHover from '../helpers/useHover';
+import LoadIcon from '../assets/Loading.gif';
 
 const RecipeDetails = () => {
     const { id } = useParams();
@@ -73,7 +74,7 @@ const RecipeDetails = () => {
                     </div>
                 </div>
             ) : (
-                <p>Loading recipe details...</p>
+                 <img src={LoadIcon} className='LoadIcon' alt='LoadIcon' />
             )}
         </div>
     );
