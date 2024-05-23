@@ -77,6 +77,11 @@
 
 }
 
+.AllRecipes.non-alcoholic-mode .custom-alert
+{
+    background-color: #F2E41D; 
+}
+
 
 .AllRecipes.non-alcoholic-mode::before {
     content: ''; 
@@ -155,4 +160,9 @@
 
 .AllRecipes .filter-button:hover {
     background-color: #F25244;
+}
+
+.AllRecipes.non-alcoholic-mode .filter-button:hover
+{
+    background-color: #262624;
 }
