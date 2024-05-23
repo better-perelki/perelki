@@ -6,7 +6,6 @@ import searchIcon from '../assets/search.png';
 import removeHoveredIcon from '../assets/remove.png';
 import removeIcon from '../assets/remove1.png';
 import useHover from '../helpers/useHover';
-import GetIngredients from '../helpers/GetIngredients.js';
 import IconRandom from '../components/IconRandom';
 
 function SearchByIngredients() {
@@ -14,7 +13,7 @@ function SearchByIngredients() {
     const [selectedIngredients, setSelectedIngredients] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [foundCocktails, setFoundCocktails] = useState([]);
-     const [showRandomIcon, setShowRandomIcon] = useState(false);
+    const [showRandomIcon, setShowRandomIcon] = useState(false);
     const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
     useEffect(() => {
@@ -64,33 +63,18 @@ function SearchByIngredients() {
                 throw new Error('Failed to fetch cocktails');
             }
             const data = await response.json();
-    
-            let i = 0;
-            while (data.drinks[i] != null && i<21) {
-                const detailsResponse = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/lookup.php?i=${data.drinks[i].idDrink}`);
-                if (!detailsResponse.ok) {
-                    throw new Error(`Failed to fetch details for drink ${data.drinks[i].strDrink}`);
-                }
-                const detailsData = await detailsResponse.json();
-                data.drinks[i] = {
-                    ...data.drinks[i],
-                    ingredients: GetIngredients(detailsData.drinks[0])
-                };
-                i++;
-            }
-    
             setFoundCocktails(data.drinks);
         } catch (error) {
             console.error('Error searching cocktails:', error);
             alert('An error occurred while searching for drinks. Please try again later.');
         }
     };
-    
-    
+
+
     useEffect(() => {
         handleSearchCocktails();
     }, [selectedIngredients]);
-    
+
 
     return (
         <div className="search-by-ingredients-container">
@@ -149,7 +133,6 @@ function SearchByIngredients() {
                                                     id={drink.idDrink}
                                                     image={drink.strDrinkThumb}
                                                     name={drink.strDrink}
-                                                    ingredients={drink.ingredients}
                                                 />
                                             ))}
                                         </div>
