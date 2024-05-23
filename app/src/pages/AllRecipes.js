@@ -100,7 +100,7 @@ const AllRecipes = () => {
         <div className={`AllRecipes ${showNonAlcoholic ? 'non-alcoholic-mode' : ''}`}>
             <div className='content'>
                 <h2>BOTTOMS UP!!!</h2>
-                <h1>{showNonAlcoholic ? "Well, at least you're avoiding hangover..." : "Well, fill your glass first..."}</h1>
+                <h3>{showNonAlcoholic ? "Well, at least you're avoiding hangover..." : "Well, fill your glass first..."}</h3>
             </div>
 
             <div className="alphabet-bar">
@@ -115,7 +115,7 @@ const AllRecipes = () => {
                 ))}
             </div>
 
-            <div className="content">
+            <div className="button-container">
                 <button
                     className="filter-button"
                     onClick={toggleNonAlcoholic}
@@ -129,7 +129,7 @@ const AllRecipes = () => {
                 const drinks = showNonAlcoholic
                     ? nonAlcoholicDrinks.filter(drink => drink.strDrink.toLowerCase().startsWith(letter.toLowerCase()))
                     : drinksByLetter[letter] || [];
-                
+
                 if (drinks.length > 0) {
                     return (
                         <div className="show-alphabet" key={letterObject.id} id={letter}>
