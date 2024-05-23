@@ -28,7 +28,7 @@ const ScrollToTop = () => {
     }, []);
 
     return (
-        <div className={`top-to-btm ${isVisible ? 'visible' : 'hidden'}`} onClick={scrollToTop}>
+        <div className={`top-to-btm ${isVisible ? 'visible' : 'hidden'}`} onClick={scrollToTop} data-testid="scroll-to-top-button">
             <FaAngleUp className="icon-position icon-style" />
         </div>
     );

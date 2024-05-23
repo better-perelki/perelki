@@ -27,7 +27,7 @@ function Navbar() {
                     </Link>
                 </div>
                 <div className='center'>
-                    <div className={`menuLinks ${isMenuOpen ? 'active' : ''}`}>
+                    <div className={`menuLinks ${isMenuOpen ? 'active' : ''}`} data-testid="menu-links">
                         <Link to='/search-by-name' onClick={toggleMenu} className={IsActiveLink('/search-by-name')}>Search by name</Link>
                         <Link to='/search-by-ingredients' onClick={toggleMenu} className={IsActiveLink('/search-by-ingredients')}>Search by ingredients</Link>
                         <Link to='/all-recipes' className={useLocation().pathname === '/all-recipes' ? 'active' : ''}>All Recipes</Link>

@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import AllRecipes from '../pages/AllRecipes';
 import alphabet from '../data/Alphabet';
 
-
 global.fetch = jest.fn();
 
 describe('AllRecipes component', () => {
@@ -30,7 +29,7 @@ describe('AllRecipes component', () => {
   });
 
   it('correclty sets drinksByLetter after fetching drinks', async () => {
-   
+
     const letter = 'A';
     const mockDrinks = [
       { idDrink: '1', strDrinkThumb: 'mockImage1.jpg', strDrink: 'Mock Drink 1' },

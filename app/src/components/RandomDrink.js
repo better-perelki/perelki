@@ -26,7 +26,7 @@ const RandomDrink = () => {
     };
 
     return (
-        <div className='RandomDrink' onClick={handleRandomDrinkClick} style={{ cursor: 'pointer' }}>
+        <div className='RandomDrink' onClick={handleRandomDrinkClick} style={{ cursor: 'pointer' }} data-testid="random-drink">
             <h2>click down below to get a unique recipe!</h2>
             <img src={RandomDrinkGif} className='RandomDrinkGif' alt='RandomDrink' />
         </div>
