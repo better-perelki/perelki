@@ -8,50 +8,65 @@ import IconRandom from '../components/IconRandom';
 
 const AllRecipes = () => {
     const [drinksByLetter, setDrinksByLetter] = useState({});
+    const [nonAlcoholicDrinks, setNonAlcoholicDrinks] = useState([]);
     const [showNonAlcoholic, setShowNonAlcoholic] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [showRandomIcon, setShowRandomIcon] = useState(false);
 
-    const fetchDrinksByLetter = async (letter) => {
+    const fetchData = async (url, key) => {
         try {
-            let apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
-
-            if (showNonAlcoholic) {
-                apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`;
+            const cachedData = localStorage.getItem(key);
+            if (cachedData) {
+                return JSON.parse(cachedData);
+            } else {
+                const response = await fetch(url);
+                const data = await response.json();
+                localStorage.setItem(key, JSON.stringify(data));
+                return data;
             }
-
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-
-            let sortedDrinks = data.drinks || [];
-            if (showNonAlcoholic) {
-                sortedDrinks.sort((a, b) => {
-                    return a.strDrink.localeCompare(b.strDrink);
-                });
-            }
-
-            setDrinksByLetter((prevDrinks) => ({
-                ...prevDrinks,
-                [letter]: sortedDrinks
-            }));
         } catch (error) {
-            console.error(`Error fetching drinks for letter ${letter}:`, error);
+            console.error('Error fetching data:', error);
+            return null;
+        }
+    };
+
+    const fetchDrinksByLetter = async (letter) => {
+        const apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
+        const key = `drinksByLetter_${letter}`;
+        const data = await fetchData(apiUrl, key);
+        if (data) {
             setDrinksByLetter((prevDrinks) => ({
                 ...prevDrinks,
-                [letter]: []
+                [letter]: data.drinks || []
             }));
         }
     };
 
+    const fetchNonAlcoholicDrinks = async () => {
+        try {
+            const apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic`;
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            setNonAlcoholicDrinks(data.drinks || []);
+        } catch (error) {
+            console.error('Error fetching non-alcoholic drinks:', error);
+            setNonAlcoholicDrinks([]);
+        }
+    };
+
     useEffect(() => {
+
         alphabet.letters.forEach((letterObject) => {
             const letter = letterObject.letter;
             fetchDrinksByLetter(letter);
         });
-    }, [showNonAlcoholic]);
+
+        fetchNonAlcoholicDrinks();
+    }, []);
 
     useEffect(() => {
+
         const timer = setTimeout(() => {
             setShowRandomIcon(true);
         }, 10000);
@@ -59,13 +74,11 @@ const AllRecipes = () => {
         return () => clearTimeout(timer);
     }, []);
 
-
     const handleLetterClick = (letter) => {
         const element = document.getElementById(letter);
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         } else {
-
             setShowAlert(true);
             setAlertMessage('No drinks found for this letter.');
             setTimeout(() => {
@@ -98,7 +111,6 @@ const AllRecipes = () => {
                         onClick={() => handleLetterClick(letterObject.letter)}
                     >
                         {letterObject.letter}
-
                     </span>
                 ))}
             </div>
@@ -106,22 +118,19 @@ const AllRecipes = () => {
             <div className="content">
                 <button
                     className="filter-button"
-                    onClick={() => toggleNonAlcoholic()}
+                    onClick={toggleNonAlcoholic}
                 >
-                    {showNonAlcoholic ? 'Show All' : 'Non-alcoholic mode'}
+                    {showNonAlcoholic ? 'Alcoholic Mode' : 'Non-alcoholic mode'}
                 </button>
             </div>
 
             {alphabet.letters.map((letterObject) => {
                 const letter = letterObject.letter;
-                const drinks = drinksByLetter[letter] || [];
-                const filteredDrinks = drinks.filter(drink => {
-                    const drinkName = drink.strDrink.toLowerCase();
-                    return !showNonAlcoholic || drinkName.startsWith(letter.toLowerCase());
-                });
-
-
-                if (filteredDrinks.length > 0) {
+                const drinks = showNonAlcoholic
+                    ? nonAlcoholicDrinks.filter(drink => drink.strDrink.toLowerCase().startsWith(letter.toLowerCase()))
+                    : drinksByLetter[letter] || [];
+                
+                if (drinks.length > 0) {
                     return (
                         <div className="show-alphabet" key={letterObject.id} id={letter}>
                             <div className='drinks'>
@@ -130,7 +139,7 @@ const AllRecipes = () => {
                                         <h3>{letter}</h3>
                                     </div>
                                     <div className='drinksList'>
-                                        {filteredDrinks.map(drink => (
+                                        {drinks.map(drink => (
                                             <Drink
                                                 key={drink.idDrink}
                                                 id={drink.idDrink}
@@ -148,6 +157,7 @@ const AllRecipes = () => {
                     return null;
                 }
             })}
+
             {showAlert && <CustomAlert message={alertMessage} onClose={handleCloseAlert} />}
             {showRandomIcon && <IconRandom />}
         </div>
