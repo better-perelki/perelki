@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import PopularList from '../helpers/PopularList';
+import PopularList from '../components/PopularList';
 
 describe('PopularList Component Tests', () => {
     // Test 1:
