@@ -6,6 +6,7 @@ import PopularList from '../components/PopularList';
 import Random from '../components/RandomDrink.js';
 import '../styles/Home.css';
 import { useEffect, useState } from 'react';
+import GetIngredients from '../helpers/GetIngredients.js';
 
 function Home() {
     return (
@@ -88,7 +89,7 @@ const OurPicks = () => {
                                 id={item.drinkData.idDrink}
                                 image={item.drinkData.strDrinkThumb}
                                 name={item.drinkData.strDrink}
-                                ingredients={item.drinkData.strIngredient1}
+                                ingredients={GetIngredients(item.drinkData)}
                             />
                             <h5>{item.explain}</h5>
                         </div>
