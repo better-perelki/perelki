@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../assets/logo.png';
 import Drink from '../components/Drink';
 import arrow from '../assets/chevron-down-2.png';
-import PopularList from '../helpers/PopularList';
+import PopularList from '../components/PopularList';
 import Random from '../components/RandomDrink.js';
 import '../styles/Home.css';
 import { useEffect, useState } from 'react';
@@ -66,7 +66,7 @@ const OurPicks = () => {
                 const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${pick.drinkName}`);
                 const data = await response.json();
                 if (data.drinks) {
-                    fetchedDrinks.push({ ...pick, drinkData: data.drinks[0] }); // merge pick data with drink data
+                    fetchedDrinks.push({ ...pick, drinkData: data.drinks[0] });
                 }
             }
             setDrinks(fetchedDrinks);
@@ -98,6 +98,5 @@ const OurPicks = () => {
         </div>
     );
 };
-
 
 export default Home;

@@ -61,13 +61,6 @@ img {
 
 }
 
-.OurPicks .drinksList {
-    width: 100%;
-    display: grid;
-    justify-content: space-between;
-    align-items: stretch;
-}
-
 .OurPicks .drink a {
     text-decoration: none;
     color: inherit;

@@ -74,7 +74,7 @@ const RecipeDetails = () => {
                     </div>
                 </div>
             ) : (
-                 <img src={LoadIcon} className='LoadIcon' alt='LoadIcon' />
+                <img src={LoadIcon} className='LoadIcon' alt='LoadIcon' />
             )}
         </div>
     );

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Drink from '../components/Drink';
-import GetIngredients from './GetIngredients';
+import Drink from './Drink';
+import GetIngredients from '../helpers/GetIngredients';
+import RenderDrinks from '../helpers/RenderDrinks';
 
 function PopularList() {
-    //storing drinks data
     const [popularDrinks, setPopularDrinks] = useState([]);
 
     useEffect(() => {
-        //fetch drinks data from the api
         const fetchPopularDrinks = async () => {
             try {
                 const response = await fetch('https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
@@ -25,17 +24,7 @@ function PopularList() {
     }, []);
 
     return (
-        <div className='drinksList'>
-            {popularDrinks.map(drink => (
-                <Drink
-                    key={drink.idDrink}
-                    id={drink.idDrink}
-                    image={drink.strDrinkThumb}
-                    name={drink.strDrink}
-                    ingredients={GetIngredients(drink)}
-                />
-            ))}
-        </div>
+        RenderDrinks(popularDrinks)
     );
 }
 

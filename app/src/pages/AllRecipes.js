@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/AllRecipes.css';
-import alphabet from '../data/Alphabet.json';
+import alphabetData from '../data/Alphabet.json';
 import nonAlcoholicDrinksData from '../data/NonAlcoholicDrinks.json';
-import Drink from '../components/Drink';
-import GetIngredients from '../helpers/GetIngredients';
+import AlphabetBar from '../components/AlphabetBar';
+import AllDrinksList from '../components/AllDrinksList';
 import CustomAlert from '../components/CustomAlert';
 import IconRandom from '../components/IconRandom';
 
 const AllRecipes = () => {
     const [drinksByLetter, setDrinksByLetter] = useState({});
     const [nonAlcoholicDrinks, setNonAlcoholicDrinks] = useState([]);
-    const [showNonAlcoholic, setShowNonAlcoholic] = useState(() => {
-        const savedState = localStorage.getItem('showNonAlcoholic');
-        return savedState ? JSON.parse(savedState) : false;
-    });
+    const [showNonAlcoholic, setShowNonAlcoholic] = useState(() => localStorage.getItem('showNonAlcoholic') ? JSON.parse(localStorage.getItem('showNonAlcoholic')) : false);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const [showRandomIcon, setShowRandomIcon] = useState(false);
@@ -50,8 +47,7 @@ const AllRecipes = () => {
 
     const fetchNonAlcoholicDrinks = async () => {
         try {
-            const data = nonAlcoholicDrinksData;
-            setNonAlcoholicDrinks(data.drinks || []);
+            setNonAlcoholicDrinks(nonAlcoholicDrinksData.drinks || []);
         } catch (error) {
             console.error('Error fetching non-alcoholic drinks:', error);
             setNonAlcoholicDrinks([]);
@@ -59,9 +55,8 @@ const AllRecipes = () => {
     };
 
     useEffect(() => {
-        alphabet.letters.forEach((letterObject) => {
-            const letter = letterObject.letter;
-            fetchDrinksByLetter(letter);
+        alphabetData.letters.forEach((letterObject) => {
+            fetchDrinksByLetter(letterObject.letter);
         });
 
         fetchNonAlcoholicDrinks();
@@ -110,17 +105,7 @@ const AllRecipes = () => {
                 </div>
             </div>
 
-            <div className="alphabet-bar">
-                {alphabet.letters.map((letterObject) => (
-                    <span
-                        key={letterObject.id}
-                        className="alphabet-link"
-                        onClick={() => handleLetterClick(letterObject.letter)}
-                    >
-                        {letterObject.letter}
-                    </span>
-                ))}
-            </div>
+            <AlphabetBar letters={alphabetData.letters} onLetterClick={handleLetterClick} />
 
             <div className="button-container">
                 <button
@@ -131,38 +116,15 @@ const AllRecipes = () => {
                 </button>
             </div>
 
-            {alphabet.letters.map((letterObject) => {
+            {alphabetData.letters.map(letterObject => {
                 const letter = letterObject.letter;
                 const drinks = showNonAlcoholic
                     ? nonAlcoholicDrinks.filter(drink => drink.strDrink.toLowerCase().startsWith(letter.toLowerCase()))
                     : drinksByLetter[letter] || [];
 
-                if (drinks.length > 0) {
-                    return (
-                        <div className="show-alphabet" key={letterObject.id} id={letter}>
-                            <div className='drinks'>
-                                <div className='content'>
-                                    <div className='letters'>
-                                        <h3>{letter}</h3>
-                                    </div>
-                                    <div className='drinksList'>
-                                        {drinks.map(drink => (
-                                            <Drink
-                                                key={drink.idDrink}
-                                                id={drink.idDrink}
-                                                image={drink.strDrinkThumb}
-                                                name={drink.strDrink}
-                                                ingredients={GetIngredients(drink)}
-                                            />
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                } else {
-                    return null;
-                }
+                return drinks.length > 0 ? (
+                    <AllDrinksList key={letterObject.id} letter={letter} drinks={drinks} />
+                ) : null;
             })}
 
             {showAlert && <CustomAlert message={alertMessage} onClose={handleCloseAlert} />}

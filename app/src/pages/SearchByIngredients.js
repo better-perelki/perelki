@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/SearchByIngredients.css';
-import Drink from '../components/Drink.js'
+import Drink from '../components/Drink';
+import Ingredient from '../components/Ingredient';
+import { addSelectedIngredient, removeSelectedIngredient, searchCocktails } from '../helpers/IngredientUtils';
 import searchIcon from '../assets/search.png';
 import removeHoveredIcon from '../assets/remove.png';
 import removeIcon from '../assets/remove1.png';
@@ -44,34 +46,8 @@ function SearchByIngredients() {
 
     const handleSearchTermChange = (e) => setSearchTerm(e.target.value.toLowerCase());
 
-    const handleAddSelectedIngredient = (ingredient) => {
-        if (!selectedIngredients.includes(ingredient)) {
-            setSelectedIngredients([...selectedIngredients, ingredient]);
-        }
-        setSearchTerm('');
-    };
-
-    const handleRemoveSelectedIngredient = (ingredient) => setSelectedIngredients(selectedIngredients.filter(item => item !== ingredient));
-
-    const filteredIngredients = ingredientsList.filter(ingredient => ingredient.toLowerCase().includes(searchTerm));
-
-    const handleSearchCocktails = async () => {
-        try {
-            const ingredientsQueryFormatted = selectedIngredients.map(ingredient => ingredient.replace(/\s/g, '_')).join(',');
-            const response = await fetch(`https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${ingredientsQueryFormatted}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch cocktails');
-            }
-            const data = await response.json();
-            setFoundCocktails(data.drinks);
-        } catch (error) {
-            console.error('Error searching cocktails:', error);
-            alert('An error occurred while searching for drinks. Please try again later.');
-        }
-    };
-
     useEffect(() => {
-        handleSearchCocktails();
+        searchCocktails(selectedIngredients, setFoundCocktails);
     }, [selectedIngredients]);
 
     return (
@@ -91,14 +67,12 @@ function SearchByIngredients() {
                 </div>
                 {searchTerm && (
                     <div className="searchResults">
-                        {filteredIngredients.map((ingredient, index) => (
-                            <div
+                        {ingredientsList.filter(ingredient => ingredient.toLowerCase().includes(searchTerm)).map((ingredient, index) => (
+                            <Ingredient
                                 key={index}
-                                className="searchResult"
-                                onClick={() => handleAddSelectedIngredient(ingredient)}
-                            >
-                                {ingredient}
-                            </div>
+                                ingredient={ingredient}
+                                onClick={() => addSelectedIngredient(ingredient, selectedIngredients, setSelectedIngredients)}
+                            />
                         ))}
                     </div>
                 )}
@@ -118,10 +92,10 @@ function SearchByIngredients() {
                             {selectedIngredients.map((ingredient, index) => (
                                 <div key={index} className="selected-ingredient">
                                     {ingredient}
-                                    <button onClick={() => handleRemoveSelectedIngredient(ingredient)}
+                                    <button onClick={() => removeSelectedIngredient(ingredient, selectedIngredients, setSelectedIngredients)}
                                         onMouseEnter={handleMouseEnter}
                                         onMouseLeave={handleMouseLeave}>
-                                        <img src={isHovered ? removeHoveredIcon : removeIcon} />
+                                        <img src={isHovered ? removeHoveredIcon : removeIcon} alt="Remove Icon" />
                                     </button>
                                 </div>
                             ))}
