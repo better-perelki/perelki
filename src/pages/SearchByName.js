@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/SearchByName.css';
-import Drink from '../components/Drink';
-import GetIngredients from '../helpers/GetIngredients';
 import searchIcon from '../assets/search.png';
 import useNameSearcher from '../helpers/NameSearcher';
 import IconRandom from '../components/IconRandom';
 import RenderDrinks from '../helpers/RenderDrinks';
 
 function SearchByName() {
-    const { searchTerm, setSearchTerm, searchResults, handleInputChange } = useNameSearcher();
+    const { searchTerm, searchResults, handleInputChange } = useNameSearcher();
     const [showRandomIcon, setShowRandomIcon] = useState(false);
 
     useEffect(() => {

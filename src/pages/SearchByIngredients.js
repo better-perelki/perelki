@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/SearchByIngredients.css';
 import Drink from '../components/Drink';
 import Ingredient from '../components/Ingredient';

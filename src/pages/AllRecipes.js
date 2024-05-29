@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../styles/AllRecipes.css';
 import alphabetData from '../data/Alphabet.json';
 import nonAlcoholicDrinksData from '../data/NonAlcoholicDrinks.json';

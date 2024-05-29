@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import Drink from './Drink';
-import GetIngredients from '../helpers/GetIngredients';
+import { useEffect, useState } from 'react';
 import RenderDrinks from '../helpers/RenderDrinks';
 
 function PopularList() {

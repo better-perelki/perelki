@@ -4,7 +4,7 @@ import RandomDrinkGif from '../assets/ezgif.com-crop.gif';
 import '../styles/RandomDrink.css';
 
 const RandomDrink = () => {
-    const [randomDrink, setRandomDrink] = useState(null);
+    const [ setRandomDrink] = useState(null);
     const navigate = useNavigate();
 
     const handleRandomDrinkClick = async () => {
