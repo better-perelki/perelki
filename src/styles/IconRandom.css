@@ -1,0 +1,143 @@
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+
+.IconRandom {
+    position: fixed;
+    top: calc(80px + 20px);
+    right: 20px;
+    width: 150px;
+    height: 150px;
+    cursor: pointer;
+    z-index: 999;
+    animation: pulse 2s infinite;
+    align-items: center;
+    display: flex;
+}
+
+.IconRandom .RandomDrinkIcon {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+
+    .IconRandom .RandomDrinkIcon {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+
+    }
+
+    .IconRandom:active {
+        animation: none;
+        transform: scale(0.9);
+    }
+
+}
+
+.CloseButton {
+    position: absolute;
+    top: 20px;
+    right: 17px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.CloseButton img {
+    width: 100%;
+    height: 100%;
+    position: center;
+}
+
+
+@media screen and (max-width: 550px) {
+    .IconRandom {
+        position: fixed;
+        top: calc(0px + 10px);
+        right: 0px;
+        width: 10px;
+        height: 10px;
+        cursor: pointer;
+        z-index: 999;
+        animation: pulse 2s infinite;
+        align-items: center;
+        display: flex;
+    }
+
+    .CloseButton img {
+        width: 80%;
+        height: 80%;
+        position: center;
+    }
+
+    .CloseButton {
+        position: absolute;
+        top: 10px;
+        right: 7px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .IconRandom {
+        top: calc(60px + 10px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .IconRandom {
+        position: fixed;
+        top: calc(50px + 10px);
+        right: 0px;
+        width: 87px;
+        height: 87px;
+        cursor: pointer;
+        z-index: 999;
+        animation: pulse 2s infinite;
+        align-items: center;
+        display: flex;
+    }
+
+    .CloseButton img {
+        width: 80%;
+        height: 80%;
+        position: center;
+    }
+
+    .CloseButton {
+        position: absolute;
+        top: 10px;
+        right: 7px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+}

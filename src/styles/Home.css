@@ -1,0 +1,134 @@
+.main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.OurPicks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+}
+
+.popular {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0 0 0;
+}
+
+.popular .content {
+    margin: 50px auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.logo {
+    max-width: 75%;
+}
+
+.arrow {
+    position: absolute;
+    bottom: 20px;
+    width: 30px;
+    z-index: 50;
+    transform: rotate(180deg);
+}
+
+img {
+    display: block;
+}
+
+.random {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+
+}
+
+.OurPicks .drink a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.OurPicks .drink img {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 25px;
+}
+
+.OurPicks .info {
+    flex: 1;
+}
+
+.OurPicks .drink h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+
+
+.OurPicks .pick {
+    text-align: center;
+}
+
+.OurPicks .pick h4 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.OurPicks .pick h5 {
+    color: var(--main-color);
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.random .RandDrink h2 {
+    color: var(--accent-color);
+}
+
+.random {
+    margin-bottom: 50px;
+}
+
+.arrow2 {
+    width: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    transform: rotate(180deg);
+}
+
+@media screen and (max-width: 600px) {
+    .random .RandDrink h2 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .OurPicks .pick h5 {
+        margin-bottom: 25px;
+        font-size: 20px;
+    }
+
+    .random .RandDrink h2 {
+        font-size: 20px;
+    }
+}

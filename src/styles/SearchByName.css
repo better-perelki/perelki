@@ -1,0 +1,36 @@
+.searchByName {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.drinks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 25px 0;
+}
+
+.drinks .content {
+    margin: 50px auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.search h2 {
+    margin: 130px 0 25px;
+}
+
+@media only screen and (max-width: 600px) {
+    .drinks {
+        margin-top: 0;
+    }
+}

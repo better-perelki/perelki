@@ -1,0 +1,146 @@
+.recipe-details-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 130px 50px 50px 50px;
+    position: relative;
+}
+
+.recipe-details {
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+}
+
+.recipe-details-content {
+    width: 45%;
+    flex: 1;
+    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.recipe-details-content h2 {
+    font-size: 72px;
+    color: var(--accent-color);
+    margin: 0;
+}
+
+.recipe-details-content h3 {
+    font-size: 32px;
+    color: var(--main-color);
+    text-transform: uppercase;
+}
+
+.recipe-details-content ul,
+p {
+    font-size: 20px;
+    color: var(--container-color);
+    list-style: none;
+}
+
+.recipe-details-content li {
+    margin: 5px 0;
+}
+
+.recipe-image-container {
+    width: 45%;
+    display: flex;
+}
+
+.recipe-image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.button {
+    position: absolute;
+    top: 140px;
+    left: 50px;
+}
+
+.button img {
+    width: 20px;
+    transform: rotate(90deg);
+}
+
+.button img:hover {
+    cursor: pointer;
+}
+
+.LoadIcon
+{
+    position: center;
+    top: 50%;
+    left: 50%;
+}
+
+@media only screen and (max-width: 1140px) {
+    .recipe-details-content h2 {
+        font-size: 64px;
+    }
+
+    .recipe-details-content h3 {
+        font-size: 24px;
+    }
+
+    .recipe-details-content ul,
+    p {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .button {
+        top: 100px;
+        left: 40px;
+    }
+
+    .recipe-details-container {
+        padding: 75px 40px 40px 40px;
+    }
+}
+
+@media only screen and (max-width: 980px) {
+    .recipe-details-content h2 {
+        font-size: 48px;
+    }
+
+    .recipe-details-content h3 {
+        font-size: 24px;
+    }
+
+    .recipe-details-content ul,
+    p {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .button {
+        top: 75px;
+        left: 30px;
+    }
+
+    .recipe-details-container {
+        padding: 50px 30px 30px 30px;
+    }
+
+    .recipe-details {
+        flex-direction: column;
+    }
+
+    .recipe-details-content {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .recipe-image-container {
+        width: 100%;
+    }
+}

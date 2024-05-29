@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --main-color: #F2E41D;
+    --accent-color: #F25244;
+    --background-color: #262624;
+    --container-color: #F2F2F2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--background-color);
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+}
+
+.App {
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    width: 100%;
+    background-color: var(--background-color);
+}
+
+h2 {
+    color: var(--main-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.drinksList {
+    width: 100%;
+    display: grid;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.drink {
+    background-color: var(--container-color);
+    border-radius: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    max-width: 400px;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+    margin: 25px;
+}
+
+.drink a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.drink img {
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border-radius: 25px;
+}
+
+.info {
+    flex: 1;
+}
+
+.drink h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+
+.drink p {
+    margin-top: 5px;
+    font-size: 16px;
+    color: var(--background-color);
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+
+.searchInput {
+    position: relative;
+}
+
+.searchInput img {
+    position: absolute;
+    top: 20%;
+    left: 25px;
+    width: 20px;
+}
+
+input {
+    width: 475px;
+    margin-right: 20px;
+    height: 48px;
+    border: none;
+    border-radius: 25px;
+    background-color: #F2F2F2;
+    padding: 0 55px;
+    margin: 0 auto 25px auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+input:focus {
+    outline: none;
+}
+
+@media only screen and (max-width: 600px) {
+    h2 {
+        font-size: 24px;
+    }
+
+    .drinksList {
+        grid-template-columns: repeat(1, 325px);
+
+    }
+
+    .searchInput input {
+        width: 300px;
+    }
+
+    .search h2 {
+        margin-top: 75px;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    .drinksList {
+        grid-template-columns: repeat(2, 325px);
+    }
+
+    .search h2 {
+        margin-top: 75px;
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    .drinksList {
+        grid-template-columns: repeat(3, 375px);
+
+    }
+}
