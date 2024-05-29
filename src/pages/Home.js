@@ -5,7 +5,7 @@ import arrow from '../assets/chevron-down-2.png';
 import PopularList from '../components/PopularList';
 import Random from '../components/RandomDrink.js';
 import '../styles/Home.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import GetIngredients from '../helpers/GetIngredients.js';
 
 function Home() {
@@ -52,11 +52,11 @@ function RandomDrink() {
 
 
 const OurPicks = () => {
-    const picks = [
+    const picks = useMemo(() => [
         { name: "Oliwia", drinkName: "aperol spritz", explain: ' "I love Aperol Spritz for its refreshing, bittersweet flavor." ' },
         { name: "Kacper", drinkName: "tom collins", explain: ' "I enjoy Tom Collins for its zesty, citrusy refreshment." ' },
         { name: "Pola", drinkName: "mojito", explain: ' "I like mojitos for their refreshing blend of mint and lime." ' }
-    ];
+    ], []);
 
     const [drinks, setDrinks] = useState([]);
 
@@ -74,7 +74,7 @@ const OurPicks = () => {
         };
 
         fetchDrinks();
-    }, []);
+    }, [picks]);
 
     return (
         <div className='OurPicks'>

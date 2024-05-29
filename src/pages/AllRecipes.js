@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import '../styles/AllRecipes.css';
 import alphabetData from '../data/Alphabet.json';
 import nonAlcoholicDrinksData from '../data/NonAlcoholicDrinks.json';
@@ -15,7 +15,7 @@ const AllRecipes = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const [showRandomIcon, setShowRandomIcon] = useState(false);
 
-    const fetchData = async (url, key) => {
+    const fetchData = useCallback(async (url, key) => {
         try {
             const cachedData = localStorage.getItem(key);
             if (cachedData) {
@@ -30,9 +30,9 @@ const AllRecipes = () => {
             console.error('Error fetching data:', error);
             return null;
         }
-    };
-
-    const fetchDrinksByLetter = async (letter) => {
+    }, []);
+    
+    const fetchDrinksByLetter = useCallback(async (letter) => {
         const apiUrl = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`;
         const key = `drinksByLetter_${letter}`;
         const data = await fetchData(apiUrl, key);
@@ -42,24 +42,24 @@ const AllRecipes = () => {
                 [letter]: data.drinks || []
             }));
         }
-    };
-
-    const fetchNonAlcoholicDrinks = async () => {
+    }, [fetchData, setDrinksByLetter]);
+    
+    const fetchNonAlcoholicDrinks = useCallback(async () => {
         try {
             setNonAlcoholicDrinks(nonAlcoholicDrinksData.drinks || []);
         } catch (error) {
             console.error('Error fetching non-alcoholic drinks:', error);
             setNonAlcoholicDrinks([]);
         }
-    };
-
+    }, []);
+    
     useEffect(() => {
         alphabetData.letters.forEach((letterObject) => {
             fetchDrinksByLetter(letterObject.letter);
         });
-
+    
         fetchNonAlcoholicDrinks();
-    }, []);
+    }, [fetchDrinksByLetter, fetchNonAlcoholicDrinks]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
