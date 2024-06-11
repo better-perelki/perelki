@@ -1,3 +1,7 @@
 .AllDrinksList .drinks-letter {
     text-transform: uppercase;
+    margin: 0 auto;
+    font-size: 70px;
+    color: #F2E41D;
+    text-align: center;
 }
