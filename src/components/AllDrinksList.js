@@ -1,6 +1,7 @@
 import React from 'react';
 import Drink from '../components/Drink';
 import GetIngredients from '../helpers/GetIngredients';
+import '../styles/AllDrinksList.css';
 
 const AllDrinksList = ({ letter, drinks }) => (
     <div className="show-alphabet" id={letter}>
