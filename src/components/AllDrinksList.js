@@ -8,7 +8,7 @@ const AllDrinksList = ({ letter, drinks }) => (
         <div className='drinks'>
             <div className='content'>
                 <div className='letters'>
-                    <h3>{letter}</h3>
+                    <h2>{letter}</h2>
                 </div>
                 <div className='drinksList'>
                     {drinks.map(drink => (
