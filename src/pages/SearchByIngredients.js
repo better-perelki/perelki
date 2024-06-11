@@ -66,7 +66,7 @@ function SearchByIngredients() {
                 </div>
                 {searchTerm && (
                     <div className="searchResults">
-                        {ingredientsList.filter(ingredient => ingredient.toLowerCase().includes(searchTerm)).map((ingredient, index) => (
+                        {ingredientsList.filter(ingredient => ingredient.split(' ').some(word => word.startsWith(searchTerm))).map((ingredient, index) => (
                             <Ingredient
                                 key={index}
                                 ingredient={ingredient}
