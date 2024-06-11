@@ -1,4 +1,3 @@
-.AllDrinksList .letters h3
-{
-  text-transform: uppercase;
+.AllDrinksList .drinks-letter {
+    text-transform: uppercase;
 }
