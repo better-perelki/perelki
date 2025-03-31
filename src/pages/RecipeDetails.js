@@ -5,15 +5,40 @@ import arrow from '../assets/chevron-down-2.png';
 import arrowBold from '../assets/arrow_bold.png';
 import useHover from '../helpers/useHover';
 import LoadIcon from '../assets/Loading.gif';
+import CustomModal from '../helpers/CustomModal';
 
 const RecipeDetails = () => {
     const { id } = useParams();
     const [recipeDetails, setRecipeDetails] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
     const { isHovered, handleMouseEnter, handleMouseLeave } = useHover();
 
     useEffect(() => {
-        const fetchRecipeDetails = async () => {
+        if(id === "99999"){
+            setRecipeDetails({
+                idDrink: "99999", 
+                strDrink: "Denatured Cocktail", 
+                strDrinkThumb: "https://i.ibb.co/jPLSM7rH/Projekt-bez-nazwy.png", 
+                strInstructions: "Pour 150ml denatured alcohol into a glass, add 50ml solvent and garnish with mint leaves.",
+                ingredients: ["Denatured Alcohol", "Solvent", "Mint leaves"], 
+            });
+
+
+             const timer = setTimeout(() => {
+                setShowModal(true);
+                setRecipeDetails({ idDrink: "99999", 
+                strDrink: "Denatured Cocktail", 
+                strDrinkThumb: "https://i.ibb.co/jPLSM7rH/Projekt-bez-nazwy.png", 
+                strInstructions: "Such a drink doesn't exist. There's no recipe for it. Try searching for another one.",
+                ingredients: ["Denatured Alcohol", "Solvent", "Mint leaves"], });
+            }, 5000);
+
+
+  
+            return () => clearTimeout(timer);
+        }
+        else{const fetchRecipeDetails = async () => {
             try {
                 const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
                 const data = await response.json();
@@ -28,9 +53,15 @@ const RecipeDetails = () => {
         };
 
         fetchRecipeDetails();
+    }
     }, [id]);
 
     const formatIngredients = (recipeDetails) => {
+
+        if (id === "99999") {
+            return recipeDetails.ingredients.map((ingredient, index) => <li key={index}>{ingredient}</li>);
+        }
+
         const ingredientsList = [];
         for (let i = 1; i <= 15; i++) {
             const ingredient = recipeDetails[`strIngredient${i}`];
@@ -46,6 +77,10 @@ const RecipeDetails = () => {
     const handleBackNavigation = () => {
         navigate(-1);
     }
+    
+    const handleCloseModal = () => {
+        setShowModal(false); 
+    };
 
     return (
         <div className="recipe-details-container">
@@ -75,6 +110,12 @@ const RecipeDetails = () => {
                 </div>
             ) : (
                 <img src={LoadIcon} className='LoadIcon' alt='LoadIcon' />
+            )}
+            {showModal && (
+                <CustomModal
+                    message="April Fools! Don't drink it! Dont't even try to make that drink!"
+                    onClose={handleCloseModal}
+                />
             )}
         </div>
     );

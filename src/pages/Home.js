@@ -12,6 +12,7 @@ function Home() {
     return (
         <div className='home'>
             <Header />
+            <AprilsFool />
             <PopularSection />
             <OurPicks />
             <RandomDrink />
@@ -24,6 +25,30 @@ function Header() {
         <div className='main'>
             <img src={logo} className='logo' alt='Logo' />
             <img src={arrow} className='arrow' alt='Arrow' />
+        </div>
+    );
+}
+
+function AprilsFool() {
+    const myDrink = {
+        idDrink: "99999", 
+        strDrink: "Denatured Cocktail", 
+        strDrinkThumb: "https://i.ibb.co/jPLSM7rH/Projekt-bez-nazwy.png", 
+        strInstructions: "Pour 150ml denatured alcohol into a glass, add 50ml lime juice and garnish with mint leaves.",
+        ingredients: ["Denatured Alcohol", "Solvent", "Mint leaves"], 
+    };
+
+    return (
+        <div className='popular'>
+            <h2>Our Bestseller!</h2>
+            <div className='content'>
+                <Drink
+                    id={myDrink.idDrink}
+                    image={myDrink.strDrinkThumb}
+                    name={myDrink.strDrink}
+                    ingredients={myDrink.ingredients.join(", ")} 
+                />
+            </div>
         </div>
     );
 }
